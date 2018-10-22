@@ -1,0 +1,30 @@
+server:
+  port: 8888
+  tomcat:
+    uri-encoding: UTF-8
+
+spring:
+  application:
+    name: juggling-treasure
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/juggling?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+    platform: mysql
+    schema: classpath:com/bbd/finance/atom/lock/schema-lock-${spring.datasource.platform}.sql
+    initialization-mode: always
+    continue-on-error: true
+    data: classpath:com/bbd/finance/atom/lock/data-lock-${spring.datasource.platform}.sql
+  jpa:
+    hibernate:
+      use-new-id-generator-mappings: false
+    generate-ddl: true
+    show-sql: true
+    open-in-view: false
+  session:
+    store-type: jdbc
+    jdbc:
+      initialize-schema: always
+  # profiles:
+    # active: oracle

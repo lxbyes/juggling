@@ -1,0 +1,13 @@
+spring:
+  #数据库的配置
+  datasource:
+    # 使用druid数据源
+    #type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:oracle:thin:@//10.28.100.59:1521/helowin
+    username: rating
+    password: dev@bbd
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+  #JPA
+  jpa:
+    database-platform: org.hibernate.dialect.Oracle10gDialect
+
