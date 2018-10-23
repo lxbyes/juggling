@@ -3,9 +3,6 @@
  */
 package me.leckie.juggling.redis.configuration;
 
-import com.fasterxml.jackson.databind.Module;
-import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import java.io.Serializable;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -31,16 +28,6 @@ public class RedisConfiguration {
     redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer());
     redisTemplate.setConnectionFactory(connectionFactory);
     return redisTemplate;
-  }
-
-  @Bean
-  public Module jdk8Module() {
-    return new Jdk8Module();
-  }
-
-  @Bean
-  public Module javaTimeModule() {
-    return new JavaTimeModule();
   }
 
 }
