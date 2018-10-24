@@ -21,6 +21,7 @@
     <module>juggling-common</module>
     <module>juggling-hive</module>
     <module>juggling-redis</module>
+    <module>juggling-jmx</module>
   </modules>
 
   <build>
