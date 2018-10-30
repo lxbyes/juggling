@@ -16,19 +16,22 @@ import java.util.stream.IntStream;
  */
 public class CompletableFutureSample {
 
-  public static void main(String[] args) throws InterruptedException {
+  public static void main(String[] args) {
 
     List<Integer> integers = new ArrayList<>();
 
     CompletableFuture[] completableFutures = IntStream.range(0, 16).mapToObj(Integer::valueOf)
-        .map(i -> CompletableFuture.supplyAsync(() -> calc(i)).thenApply(h -> {
-          System.out.println("thenApply -> " + h);
+        .map(i -> CompletableFuture.supplyAsync(() -> calc(i)).thenApplyAsync(h -> {
+          System.out.println("thenApply -> " + h + ", " + Thread.currentThread().getName());
           return h;
         }).whenComplete((s, e) -> {
-          System.out.println("whenComplete -> " + s + ", " + e);
+          System.out.println("whenComplete -> " + s + ", " + e + ", " + Thread.currentThread().getName());
           integers.add(s);
         })).toArray(CompletableFuture[]::new);
-    CompletableFuture.allOf(completableFutures).join();
+    CompletableFuture.allOf(completableFutures).whenComplete((r, e) -> {
+      System.out
+          .println("whenComaaa: " + r + ", " + integers);
+    }).join();
     Optional<Integer> resultOptional = integers.stream().reduce((sum, x) -> sum + x);
     System.out.println("result -> " + resultOptional.orElse(0));
   }
