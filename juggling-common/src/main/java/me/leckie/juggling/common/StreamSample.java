@@ -3,6 +3,7 @@
  */
 package me.leckie.juggling.common;
 
+import java.util.Arrays;
 import java.util.OptionalInt;
 import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
@@ -61,6 +62,10 @@ public class StreamSample {
       return i + j;
     });
     System.out.format("sum of 0-999 is %d\n", sum20based);
+    printLine();
+
+    Integer[] integers = Stream.of(1, 2, 3, 4).toArray(Integer[]::new);
+    System.out.println(Arrays.asList(integers));
     printLine();
   }
 }
