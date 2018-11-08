@@ -24,6 +24,7 @@
     <module>juggling-jmx</module>
     <module>juggling-jdk8feature</module>
     <module>juggling-liquibase</module>
+    <module>juggling-flyway</module>
   </modules>
 
   <dependencyManagement>
