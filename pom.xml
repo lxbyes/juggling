@@ -23,6 +23,7 @@
     <module>juggling-redis</module>
     <module>juggling-jmx</module>
     <module>juggling-jdk8feature</module>
+    <module>juggling-liquibase</module>
   </modules>
 
   <dependencyManagement>
