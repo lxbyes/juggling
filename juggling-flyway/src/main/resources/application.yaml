@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    platform: mysql
+    name: dev
+    url: jdbc:mysql://127.0.0.1:3306/juggling_migration?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  flyway:
+    locations: classpath:db/migration/${spring.datasource.platform}
