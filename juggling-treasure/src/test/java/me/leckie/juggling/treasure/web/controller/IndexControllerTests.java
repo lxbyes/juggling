@@ -1,6 +1,3 @@
-/**
- * BBD Service Inc All Rights Reserved @2018
- */
 package me.leckie.juggling.treasure.web.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;

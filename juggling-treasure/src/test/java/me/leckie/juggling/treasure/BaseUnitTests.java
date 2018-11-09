@@ -1,6 +1,3 @@
-/**
- * BBD Service Inc All Rights Reserved @2018
- */
 package me.leckie.juggling.treasure;
 
 import org.junit.runner.RunWith;
