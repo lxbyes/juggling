@@ -7,6 +7,8 @@ spring:
     admin:
       client:
         url: http://localhost:8080
+      ui:
+        title: Juggling Monitor
 management:
   endpoints:
     web:
