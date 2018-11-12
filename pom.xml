@@ -26,6 +26,7 @@
     <module>juggling-liquibase</module>
     <module>juggling-flyway</module>
     <module>juggling-admin</module>
+    <module>juggling-autowired</module>
   </modules>
 
   <dependencyManagement>
