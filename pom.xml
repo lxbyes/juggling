@@ -28,6 +28,7 @@
     <module>juggling-flyway</module>
     <module>juggling-admin</module>
     <module>juggling-autowired</module>
+    <module>juggling-dynamicbeanload</module>
   </modules>
 
   <dependencyManagement>
