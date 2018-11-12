@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    platform: oracle
+    url: jdbc:oracle:thin:@//10.28.100.59:1521/helowin
+    username: juggling
+    password: juggling
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+  jpa:
+    database-platform: org.hibernate.dialect.Oracle10gDialect
+
+
+    #18.3
+    #12.2
+    #12.1 Flyway Enterprise
+    #11.2 Flyway Enterprise
+    #11.1 Flyway Enterprise
+    #10.2 Flyway Enterprise
+    #10.1 Flyway Enterprise
+

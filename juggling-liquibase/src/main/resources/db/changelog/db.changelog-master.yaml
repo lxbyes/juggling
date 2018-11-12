@@ -1,0 +1,66 @@
+databaseChangeLog:
+  - preConditions:
+    - runningAs:
+        username: juggling
+
+  - changeSet:
+      id: 1
+      author: Leckie
+      changes:
+        - createTable:
+            tableName: person
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: firstname
+                  type: varchar(50)
+              - column:
+                  name: lastname
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: state
+                  type: char(2)
+
+  - changeSet:
+      id: 2
+      author: Leckie
+      changes:
+        - addColumn:
+            tableName: person
+            columns:
+              - column:
+                  name: username
+                  type: varchar(8)
+
+  - changeSet:
+      id: 3
+      author: Leckie
+      changes:
+        - addLookupTable:
+            existingTableName: person
+            existingColumnName: state
+            newTableName: state
+            newColumnName: id
+            newColumnDataType: char(2)
+
+  - changeSet:
+      id: 4
+      author: laixianbo
+      changes:
+        - addColumn:
+            tableName: person
+            columns:
+              - column:
+                  name: price
+                  type: bigint(20)
+              - column:
+                  name: age
+                  type: int(10)

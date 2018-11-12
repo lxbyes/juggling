@@ -1,6 +1,3 @@
-/**
- * BBD Service Inc All Rights Reserved @2018
- */
 package me.leckie.juggling.redis.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;

@@ -1,6 +1,3 @@
-/**
- * BBD Service Inc All Rights Reserved @2018
- */
 package me.leckie.juggling.treasure.service.impl;
 
 import me.leckie.juggling.treasure.model.Treasure;

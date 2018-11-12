@@ -1,0 +1,16 @@
+spring:
+  application:
+    admin:
+      enabled: true
+    name: juggling-admin
+  boot:
+    admin:
+      client:
+        url: http://localhost:8080
+      ui:
+        title: Juggling Monitor
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
