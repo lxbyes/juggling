@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import me.leckie.juggling.facade.AInterface;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -24,6 +25,9 @@ import org.springframework.stereotype.Service;
 public class DynamicbeanloadService implements ApplicationContextAware {
 
   private Logger logger = LoggerFactory.getLogger(DynamicbeanloadService.class);
+
+  @Autowired
+  private List<AInterface> aInterfaces;
 
   @Autowired
   private DynamicService dynamicService;
@@ -58,7 +62,7 @@ public class DynamicbeanloadService implements ApplicationContextAware {
   public void updateBean(String beanName) {
     try {
       URLClassLoader urlClassLoader = URLClassLoader
-          .newInstance(new URL[]{new URL("file:\\D:\\juggling-simple-4.jar")});
+          .newInstance(new URL[]{new URL("file:\\D:\\juggling-simple-5.jar")});
       beanFactory.setBeanClassLoader(urlClassLoader);
     } catch (MalformedURLException e) {
       e.printStackTrace();
@@ -74,8 +78,7 @@ public class DynamicbeanloadService implements ApplicationContextAware {
     }
   }
 
-  public Object getBean(String beanName)
-      throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+  public Object getBean(String beanName) {
     if (beanFactory.containsBeanDefinition(beanName)) {
       Map<String, Object> item = new HashMap<>();
       item.put("beanName", beanName);

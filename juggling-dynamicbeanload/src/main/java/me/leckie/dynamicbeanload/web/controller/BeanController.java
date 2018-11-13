@@ -1,6 +1,5 @@
 package me.leckie.dynamicbeanload.web.controller;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import me.leckie.dynamicbeanload.service.DynamicbeanloadService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,8 +43,7 @@ public class BeanController {
   }
 
   @GetMapping("/{beanName}")
-  public Object getBean(@PathVariable String beanName)
-      throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+  public Object getBean(@PathVariable String beanName) {
     return dynamicbeanloadService.getBean(beanName);
   }
 }
