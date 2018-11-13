@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import me.leckie.juggling.facade.AInterface;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -168,5 +169,12 @@ public class DynamicbeanloadService implements ApplicationContextAware {
     } catch (InvocationTargetException e) {
       e.printStackTrace();
     }*/
+  }
+
+  public Object getAService() {
+    return Arrays.stream(beanFactory.getBeanNamesForType(AInterface.class)).map(beanName -> {
+      System.out.println(beanName + " containsBean: " + beanFactory.containsBean(beanName));
+      return beanFactory.getBean(beanName).getClass().getName();
+    }).collect(Collectors.toList());
   }
 }

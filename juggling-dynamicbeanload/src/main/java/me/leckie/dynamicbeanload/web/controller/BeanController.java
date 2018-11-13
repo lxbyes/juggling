@@ -46,4 +46,9 @@ public class BeanController {
   public Object getBean(@PathVariable String beanName) {
     return dynamicbeanloadService.getBean(beanName);
   }
+
+  @GetMapping("/aservice")
+  public Object getBean() {
+    return dynamicbeanloadService.getAService();
+  }
 }
