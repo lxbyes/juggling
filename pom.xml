@@ -30,6 +30,7 @@
     <module>juggling-autowired</module>
     <module>juggling-dynamicbeanload</module>
     <module>juggling-simple</module>
+    <module>juggling-facade</module>
   </modules>
 
   <dependencyManagement>
@@ -38,6 +39,11 @@
         <groupId>com.google.guava</groupId>
         <artifactId>guava</artifactId>
         <version>23.0</version>
+      </dependency>
+      <dependency>
+        <groupId>me.leckie</groupId>
+        <artifactId>juggling-facade</artifactId>
+        <version>1.0-SNAPSHOT</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

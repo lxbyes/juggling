@@ -1,11 +1,11 @@
 package me.leckie.dynamicbeanload.service;
 
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,9 +55,10 @@ public class DynamicbeanloadService implements ApplicationContextAware {
         .registerBeanDefinition(beanName, BeanDefinitionBuilder.genericBeanDefinition(beanName).getBeanDefinition());
   }
 
-  public void zhiupdateBean(String beanName) {
+  public void updateBean(String beanName) {
     try {
-      URLClassLoader urlClassLoader = new URLClassLoader(new URL[]{new URL("file:\\D:\\juggling-simple-2.jar")});
+      URLClassLoader urlClassLoader = URLClassLoader
+          .newInstance(new URL[]{new URL("file:\\D:\\juggling-simple-4.jar")});
       beanFactory.setBeanClassLoader(urlClassLoader);
     } catch (MalformedURLException e) {
       e.printStackTrace();
@@ -84,8 +85,23 @@ public class DynamicbeanloadService implements ApplicationContextAware {
       }
       Object bean = beanFactory.getBean(beanName);
       Class<?> beanClass = bean.getClass();
-      Method sayMethod = beanClass.getMethod("say");
-      sayMethod.invoke(bean);
+      Arrays.stream(beanClass.getMethods()).forEach(method -> {
+            method.setAccessible(true);
+            try {
+              if (method.getName().equals("say")) {
+                method.invoke(bean);
+              } else if (method.getName().equals("b")) {
+                System.out.println(method.invoke(bean, "b"));
+              } else if (method.getName().equals("a")) {
+                System.out.println(method.invoke(bean, "a"));
+              }
+            } catch (IllegalAccessException e) {
+              e.printStackTrace();
+            } catch (InvocationTargetException e) {
+              e.printStackTrace();
+            }
+          }
+      );
       return item;
     }
     return null;
@@ -99,7 +115,8 @@ public class DynamicbeanloadService implements ApplicationContextAware {
         .getBeanFactory();
     try {
       // 使用URLClassLoader
-      URLClassLoader urlClassLoader = new URLClassLoader(new URL[]{new URL("file:\\D:\\juggling-simple.jar")});
+      URLClassLoader urlClassLoader = URLClassLoader
+          .newInstance(new URL[]{new URL("file:\\D:\\juggling-simple-1.jar")});
       beanFactory.setBeanClassLoader(urlClassLoader);
     } catch (MalformedURLException e) {
       e.printStackTrace();

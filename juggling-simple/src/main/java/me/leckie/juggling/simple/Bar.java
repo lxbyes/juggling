@@ -6,4 +6,8 @@ package me.leckie.juggling.simple;
  */
 public class Bar {
 
+  public void say() {
+    System.out.println(" -> I'm a instance of " + getClass().getName());
+  }
+
 }

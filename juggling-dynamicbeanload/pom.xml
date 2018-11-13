@@ -21,6 +21,10 @@
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>me.leckie</groupId>
+      <artifactId>juggling-facade</artifactId>
+    </dependency>
   </dependencies>
 
 </project>
