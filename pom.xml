@@ -29,6 +29,7 @@
     <module>juggling-admin</module>
     <module>juggling-autowired</module>
     <module>juggling-dynamicbeanload</module>
+    <module>juggling-simple</module>
   </modules>
 
   <dependencyManagement>
