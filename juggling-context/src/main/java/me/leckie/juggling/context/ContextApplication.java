@@ -32,7 +32,8 @@ public class ContextApplication {
     subApplicationContext.refresh();
     subApplicationContext.start();
     beanFactory.setAllowBeanDefinitionOverriding(true);
-    registerBean(beanFactory, "me.leckie.juggling.simple.FooService", "me.leckie.juggling.simple.FooService",
+    subBeanFactory.setAllowBeanDefinitionOverriding(true);
+    registerBean(subBeanFactory, "me.leckie.juggling.simple.FooService", "me.leckie.juggling.simple.FooService",
         "me.leckie.juggling.simple.AService");
 
     System.out.println("-------------------------");

@@ -22,8 +22,12 @@ import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.core.annotation.AnnotationUtils;
+import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.Mapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 @Service
 public class DynamicbeanloadService implements ApplicationContextAware {
@@ -35,6 +39,10 @@ public class DynamicbeanloadService implements ApplicationContextAware {
 
   @Autowired
   private DynamicService dynamicService;
+
+  @Autowired
+  private RequestMappingHandlerMapping requestMappingHandlerMapping;
+
 
   private ApplicationContext applicationContext;
 
@@ -129,6 +137,38 @@ public class DynamicbeanloadService implements ApplicationContextAware {
     return null;
   }
 
+  public Object registerMapping(String beanName) {
+    addBean(beanName);
+    Object bean = beanFactory.getBean(beanName);
+    Map item = new HashMap();
+    item.put("beanName", beanName);
+    item.put("beanClass", bean.getClass().getName());
+    item.put("mappingMethodInfos", Arrays.stream(bean.getClass().getMethods())
+        .filter(
+            method -> Arrays.stream(method.getAnnotations())
+                .anyMatch(
+                    annotation -> annotation.annotationType().isAnnotationPresent(Mapping.class)))
+        .map(method -> {
+          Map<String, Object> info = new HashMap<>();
+          //TODO
+          RequestMapping annotation = method.getAnnotation(RequestMapping.class);
+          info.put("pattern", annotation.value());
+          info.put("method", annotation.method());
+          info.put("path", annotation.path());
+          return info;
+        }).collect(
+            Collectors.toList()));
+    return item;
+  }
+
+  public Object getMappings() {
+    return beanFactory.getBeansWithAnnotation(Controller.class).values().stream().map(bean -> {
+      Map item = new HashMap();
+      item.put("beanClassName", bean.getClass().getName());
+      return item;
+    }).collect(Collectors.toList());
+  }
+
   @Override
   public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
     ConfigurableApplicationContext configurableApplicationContext = (ConfigurableApplicationContext) applicationContext;
@@ -138,7 +178,7 @@ public class DynamicbeanloadService implements ApplicationContextAware {
     try {
       // 使用URLClassLoader
       URLClassLoader urlClassLoader = URLClassLoader
-          .newInstance(new URL[]{new URL("file:\\D:\\juggling-simple-1.jar")});
+          .newInstance(new URL[]{new URL("file:\\D:\\juggling-simple-7.jar")});
       beanFactory.setBeanClassLoader(urlClassLoader);
     } catch (MalformedURLException e) {
       e.printStackTrace();

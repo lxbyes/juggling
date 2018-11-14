@@ -56,4 +56,14 @@ public class BeanController {
   public Object listDefintions() {
     return dynamicbeanloadService.listBeanDefinitions();
   }
+
+  @GetMapping("/mappings/{beanName}")
+  public Object addAndGet(@PathVariable String beanName) {
+    return dynamicbeanloadService.registerMapping(beanName);
+  }
+
+  @GetMapping("/mappings")
+  public Object mappings() {
+    return dynamicbeanloadService.getMappings();
+  }
 }

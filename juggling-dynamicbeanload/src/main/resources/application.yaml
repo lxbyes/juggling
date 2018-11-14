@@ -10,6 +10,7 @@ spring:
     admin:
       client:
         url: http://localhost:8080
+        enabled: false
       ui:
         title: Juggling Dynamicbeanload
 management:

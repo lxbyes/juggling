@@ -4,6 +4,7 @@ import me.leckie.juggling.facade.listener.PostConstructAndPreDestroyListener;
 import me.leckie.juggling.simple.AService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,6 +22,16 @@ public class ExtendController implements PostConstructAndPreDestroyListener {
   @GetMapping("/a")
   public String hello() {
     return aService.a(getClass().getName());
+  }
+
+  @RequestMapping("/b")
+  public String world() {
+    return "Hello, World!";
+  }
+
+  @PostMapping(value = {"c", "/d"}, params = {"a", "v"})
+  public String post() {
+    return "post";
   }
 
 }
