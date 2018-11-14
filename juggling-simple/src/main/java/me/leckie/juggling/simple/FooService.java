@@ -1,5 +1,6 @@
 package me.leckie.juggling.simple;
 
+import me.leckie.juggling.facade.listener.PostConstructAndPreDestroyListener;
 import org.springframework.stereotype.Service;
 
 /**
@@ -7,7 +8,7 @@ import org.springframework.stereotype.Service;
  * @version $Id: SimpleService.java, v0.1 2018/11/13 10:15 laixianbo Exp $$
  */
 @Service
-public class FooService {
+public class FooService implements PostConstructAndPreDestroyListener {
 
   public void say() {
     System.out.println(" -> I'm a instance of " + getClass().getName());

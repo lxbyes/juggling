@@ -2,6 +2,7 @@ package me.leckie.juggling.simple;
 
 import me.leckie.juggling.facade.AInterface;
 import me.leckie.juggling.facade.BInterface;
+import me.leckie.juggling.facade.listener.PostConstructAndPreDestroyListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Service;
  * @version $Id: AService.java, v0.1 2018/11/13 14:59 laixianbo Exp $$
  */
 @Service
-public class AService implements AInterface {
+public class AService implements AInterface, PostConstructAndPreDestroyListener {
 
   @Autowired
   private BInterface bInterface;

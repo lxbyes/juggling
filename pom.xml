@@ -31,6 +31,7 @@
     <module>juggling-dynamicbeanload</module>
     <module>juggling-simple</module>
     <module>juggling-facade</module>
+    <module>juggling-context</module>
   </modules>
 
   <dependencyManagement>

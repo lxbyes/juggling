@@ -1,5 +1,6 @@
 package me.leckie.juggling.simple;
 
+import me.leckie.juggling.facade.listener.PostConstructAndPreDestroyListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Service;
  * @version $Id: BarService.java, v0.1 2018/11/13 10:18 laixianbo Exp $$
  */
 @Service
-public class BarService {
+public class BarService implements PostConstructAndPreDestroyListener {
 
   @Autowired
   private FooService fooService;

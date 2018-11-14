@@ -1,5 +1,6 @@
 package me.leckie.juggling.simple.web.controller;
 
+import me.leckie.juggling.facade.listener.PostConstructAndPreDestroyListener;
 import me.leckie.juggling.simple.AService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/others")
-public class ExtendController {
+public class ExtendController implements PostConstructAndPreDestroyListener {
 
   @Autowired
   private AService aService;
