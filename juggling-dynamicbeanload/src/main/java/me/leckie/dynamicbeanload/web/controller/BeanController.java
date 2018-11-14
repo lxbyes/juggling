@@ -51,4 +51,9 @@ public class BeanController {
   public Object getBean() {
     return dynamicbeanloadService.getAService();
   }
+
+  @GetMapping("/definitions")
+  public Object listDefintions() {
+    return dynamicbeanloadService.listBeanDefinitions();
+  }
 }

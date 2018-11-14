@@ -14,12 +14,15 @@ import me.leckie.juggling.facade.AInterface;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -50,6 +53,21 @@ public class DynamicbeanloadService implements ApplicationContextAware {
       list.add(item);
     }
     return list;
+  }
+
+  public List<Object> listBeanDefinitions() {
+    return Arrays.stream(beanFactory.getBeanDefinitionNames()).map(beanDefinitionName -> {
+      Map map = new HashMap();
+      map.put("beanDefinitionName", beanDefinitionName);
+      BeanDefinition beanDefinition = beanFactory.getBeanDefinition(beanDefinitionName);
+      map.put("beanDefinitionClass", beanDefinition.getBeanClassName());
+      map.put("DependsOn", beanDefinition.getDependsOn());
+      map.put("Description", beanDefinition.getDescription());
+      map.put("ParentName", beanDefinition.getParentName());
+      map.put("ResourceDescription", beanDefinition.getResourceDescription());
+      map.put("FactoryBeanName", beanDefinition.getFactoryBeanName());
+      return map;
+    }).collect(Collectors.toList());
   }
 
   public void addBean(String beanName) {
@@ -175,6 +193,13 @@ public class DynamicbeanloadService implements ApplicationContextAware {
     return Arrays.stream(beanFactory.getBeanNamesForType(AInterface.class)).map(beanName -> {
       System.out.println(beanName + " containsBean: " + beanFactory.containsBean(beanName));
       return beanFactory.getBean(beanName).getClass().getName();
+    }).collect(Collectors.toList());
+  }
+
+  public List getContextBean() {
+    return Arrays.stream(beanFactory.getBeanNamesForType(Object.class)).filter(beanName -> {
+      Object bean = beanFactory.getBean(beanName);
+      return bean instanceof BeanFactory;
     }).collect(Collectors.toList());
   }
 }

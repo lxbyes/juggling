@@ -1,0 +1,19 @@
+server:
+  port: 8088
+
+spring:
+  application:
+    admin:
+      enabled: true
+    name: juggling-dynamicbeanload
+  boot:
+    admin:
+      client:
+        url: http://localhost:8080
+      ui:
+        title: Juggling Dynamicbeanload
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
