@@ -28,7 +28,7 @@ public class AdminApplication implements CommandLineRunner, ApplicationRunner {
   }
 
   @Override
-  public void run(ApplicationArguments args) throws Exception {
+  public void run(ApplicationArguments args) {
     System.out.println("ApplicationArguments-----------------------");
     System.out.println(args.getNonOptionArgs());
     System.out.println(args.getOptionNames());
