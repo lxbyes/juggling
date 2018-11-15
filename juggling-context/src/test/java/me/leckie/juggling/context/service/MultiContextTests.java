@@ -1,5 +1,6 @@
 package me.leckie.juggling.context.service;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -120,6 +121,18 @@ public class MultiContextTests implements BeanFactoryAware, ApplicationContextAw
     registerBeanOn(subApplicationContext, beanNames);
     Assert.assertTrue(anotherContext.getBean(beanNames[0]) != subApplicationContext.getBean(beanNames[0]));
     Assert.assertTrue(anotherContext.getBean("ABService") == subApplicationContext.getBean("ABService"));
+  }
+
+  @Test
+  public void testCloseApplicationContext() throws IOException {
+    GenericApplicationContext anotherContext = makeNewSubApplicationContext();
+    String[] beanNames = {"me.leckie.juggling.simple.AService", "me.leckie.juggling.context.service.AAAService"};
+    registerBeanOn(anotherContext, beanNames);
+    Assert.assertTrue(anotherContext.isActive());
+    Assert.assertTrue(anotherContext.isRunning());
+    anotherContext.close();
+    Assert.assertFalse(anotherContext.isActive());
+    Assert.assertFalse(anotherContext.isRunning());
   }
 
   private GenericApplicationContext makeNewSubApplicationContext() throws MalformedURLException {
