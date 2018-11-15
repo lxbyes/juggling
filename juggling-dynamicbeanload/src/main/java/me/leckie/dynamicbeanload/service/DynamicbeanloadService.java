@@ -32,8 +32,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.condition.PatternsRequestCondition;
-import org.springframework.web.servlet.mvc.condition.RequestMethodsRequestCondition;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
@@ -164,12 +162,9 @@ public class DynamicbeanloadService implements ApplicationContextAware {
               info.put("method", Arrays.stream(HttpMethod.values()).map(m -> m.name()).toArray());
             }
             info.put("path", requestMapping.path());
-            PatternsRequestCondition patternsRequestCondition = new PatternsRequestCondition(requestMapping.value());
-            RequestMethodsRequestCondition requestMethodsRequestCondition = new RequestMethodsRequestCondition(
-                RequestMethod.values());
-            RequestMappingInfo requestMappingInfo = new RequestMappingInfo(patternsRequestCondition,
-                requestMethodsRequestCondition, null, null, null, null, null);
-            requestMappingHandlerMapping.registerMapping(requestMappingInfo, beanName, method);
+            requestMappingHandlerMapping.registerMapping(RequestMappingInfo.paths(requestMapping.value())
+                    .methods(requestMapping.method().length > 0 ? requestMapping.method() : RequestMethod.values()).build(),
+                beanName, method);
             return info;
           }
           GetMapping getMapping = method.getAnnotation(GetMapping.class);
@@ -177,12 +172,9 @@ public class DynamicbeanloadService implements ApplicationContextAware {
             info.put("pattern", getMapping.value());
             info.put("method", HttpMethod.GET.name());
             info.put("path", getMapping.path());
-            PatternsRequestCondition patternsRequestCondition = new PatternsRequestCondition(getMapping.value());
-            RequestMethodsRequestCondition requestMethodsRequestCondition = new RequestMethodsRequestCondition(
-                RequestMethod.GET);
-            RequestMappingInfo requestMappingInfo = new RequestMappingInfo(patternsRequestCondition,
-                requestMethodsRequestCondition, null, null, null, null, null);
-            requestMappingHandlerMapping.registerMapping(requestMappingInfo, beanName, method);
+            requestMappingHandlerMapping
+                .registerMapping(RequestMappingInfo.paths(getMapping.value()).methods(RequestMethod.GET).build(),
+                    beanName, method);
             return info;
           }
           PostMapping postMapping = method.getAnnotation(PostMapping.class);
@@ -190,12 +182,9 @@ public class DynamicbeanloadService implements ApplicationContextAware {
             info.put("pattern", postMapping.value());
             info.put("method", HttpMethod.POST.name());
             info.put("path", postMapping.path());
-            PatternsRequestCondition patternsRequestCondition = new PatternsRequestCondition(postMapping.value());
-            RequestMethodsRequestCondition requestMethodsRequestCondition = new RequestMethodsRequestCondition(
-                RequestMethod.POST);
-            RequestMappingInfo requestMappingInfo = new RequestMappingInfo(patternsRequestCondition,
-                requestMethodsRequestCondition, null, null, null, null, null);
-            requestMappingHandlerMapping.registerMapping(requestMappingInfo, beanName, method);
+            requestMappingHandlerMapping
+                .registerMapping(RequestMappingInfo.paths(postMapping.value()).methods(RequestMethod.POST).build(),
+                    beanName, method);
             return info;
           }
           DeleteMapping deleteMapping = method.getAnnotation(DeleteMapping.class);
@@ -203,12 +192,9 @@ public class DynamicbeanloadService implements ApplicationContextAware {
             info.put("pattern", deleteMapping.value());
             info.put("method", HttpMethod.DELETE.name());
             info.put("path", deleteMapping.path());
-            PatternsRequestCondition patternsRequestCondition = new PatternsRequestCondition(deleteMapping.value());
-            RequestMethodsRequestCondition requestMethodsRequestCondition = new RequestMethodsRequestCondition(
-                RequestMethod.DELETE);
-            RequestMappingInfo requestMappingInfo = new RequestMappingInfo(patternsRequestCondition,
-                requestMethodsRequestCondition, null, null, null, null, null);
-            requestMappingHandlerMapping.registerMapping(requestMappingInfo, beanName, method);
+            requestMappingHandlerMapping
+                .registerMapping(RequestMappingInfo.paths(deleteMapping.value()).methods(RequestMethod.DELETE).build(),
+                    beanName, method);
             return info;
           }
           PutMapping putMapping = method.getAnnotation(PutMapping.class);
@@ -216,12 +202,9 @@ public class DynamicbeanloadService implements ApplicationContextAware {
             info.put("pattern", putMapping.value());
             info.put("method", HttpMethod.PUT.name());
             info.put("path", putMapping.path());
-            PatternsRequestCondition patternsRequestCondition = new PatternsRequestCondition(putMapping.value());
-            RequestMethodsRequestCondition requestMethodsRequestCondition = new RequestMethodsRequestCondition(
-                RequestMethod.PUT);
-            RequestMappingInfo requestMappingInfo = new RequestMappingInfo(patternsRequestCondition,
-                requestMethodsRequestCondition, null, null, null, null, null);
-            requestMappingHandlerMapping.registerMapping(requestMappingInfo, beanName, method);
+            requestMappingHandlerMapping
+                .registerMapping(RequestMappingInfo.paths(putMapping.value()).methods(RequestMethod.PUT).build(),
+                    beanName, method);
             return info;
           }
           PatchMapping patchMapping = method.getAnnotation(PatchMapping.class);
@@ -229,12 +212,9 @@ public class DynamicbeanloadService implements ApplicationContextAware {
             info.put("pattern", patchMapping.value());
             info.put("method", HttpMethod.PATCH.name());
             info.put("path", patchMapping.path());
-            PatternsRequestCondition patternsRequestCondition = new PatternsRequestCondition(patchMapping.value());
-            RequestMethodsRequestCondition requestMethodsRequestCondition = new RequestMethodsRequestCondition(
-                RequestMethod.PATCH);
-            RequestMappingInfo requestMappingInfo = new RequestMappingInfo(patternsRequestCondition,
-                requestMethodsRequestCondition, null, null, null, null, null);
-            requestMappingHandlerMapping.registerMapping(requestMappingInfo, beanName, method);
+            requestMappingHandlerMapping
+                .registerMapping(RequestMappingInfo.paths(patchMapping.value()).methods(RequestMethod.PUT).build(),
+                    beanName, method);
             return info;
           }
           return info;
@@ -257,57 +237,34 @@ public class DynamicbeanloadService implements ApplicationContextAware {
         .forEach(method -> {
           RequestMapping requestMapping = method.getAnnotation(RequestMapping.class);
           if (requestMapping != null) {
-            PatternsRequestCondition patternsRequestCondition = new PatternsRequestCondition(requestMapping.value());
-            RequestMethodsRequestCondition requestMethodsRequestCondition = new RequestMethodsRequestCondition(
-                RequestMethod.values());
-            RequestMappingInfo requestMappingInfo = new RequestMappingInfo(patternsRequestCondition,
-                requestMethodsRequestCondition, null, null, null, null, null);
-            requestMappingHandlerMapping.unregisterMapping(requestMappingInfo);
+            requestMappingHandlerMapping.unregisterMapping(RequestMappingInfo.paths(requestMapping.value())
+                .methods(requestMapping.method().length > 0 ? requestMapping.method() : RequestMethod.values())
+                .build());
           }
           GetMapping getMapping = method.getAnnotation(GetMapping.class);
           if (getMapping != null) {
-            PatternsRequestCondition patternsRequestCondition = new PatternsRequestCondition(getMapping.value());
-            RequestMethodsRequestCondition requestMethodsRequestCondition = new RequestMethodsRequestCondition(
-                RequestMethod.GET);
-            RequestMappingInfo requestMappingInfo = new RequestMappingInfo(patternsRequestCondition,
-                requestMethodsRequestCondition, null, null, null, null, null);
-            requestMappingHandlerMapping.unregisterMapping(requestMappingInfo);
+            requestMappingHandlerMapping
+                .unregisterMapping(RequestMappingInfo.paths(getMapping.value()).methods(RequestMethod.GET).build());
           }
           PostMapping postMapping = method.getAnnotation(PostMapping.class);
           if (postMapping != null) {
-            PatternsRequestCondition patternsRequestCondition = new PatternsRequestCondition(postMapping.value());
-            RequestMethodsRequestCondition requestMethodsRequestCondition = new RequestMethodsRequestCondition(
-                RequestMethod.POST);
-            RequestMappingInfo requestMappingInfo = new RequestMappingInfo(patternsRequestCondition,
-                requestMethodsRequestCondition, null, null, null, null, null);
-            requestMappingHandlerMapping.unregisterMapping(requestMappingInfo);
+            requestMappingHandlerMapping
+                .unregisterMapping(RequestMappingInfo.paths(postMapping.value()).methods(RequestMethod.POST).build());
           }
           DeleteMapping deleteMapping = method.getAnnotation(DeleteMapping.class);
           if (deleteMapping != null) {
-            PatternsRequestCondition patternsRequestCondition = new PatternsRequestCondition(deleteMapping.value());
-            RequestMethodsRequestCondition requestMethodsRequestCondition = new RequestMethodsRequestCondition(
-                RequestMethod.DELETE);
-            RequestMappingInfo requestMappingInfo = new RequestMappingInfo(patternsRequestCondition,
-                requestMethodsRequestCondition, null, null, null, null, null);
-            requestMappingHandlerMapping.unregisterMapping(requestMappingInfo);
+            requestMappingHandlerMapping.unregisterMapping(
+                RequestMappingInfo.paths(deleteMapping.value()).methods(RequestMethod.DELETE).build());
           }
           PutMapping putMapping = method.getAnnotation(PutMapping.class);
           if (putMapping != null) {
-            PatternsRequestCondition patternsRequestCondition = new PatternsRequestCondition(putMapping.value());
-            RequestMethodsRequestCondition requestMethodsRequestCondition = new RequestMethodsRequestCondition(
-                RequestMethod.PUT);
-            RequestMappingInfo requestMappingInfo = new RequestMappingInfo(patternsRequestCondition,
-                requestMethodsRequestCondition, null, null, null, null, null);
-            requestMappingHandlerMapping.unregisterMapping(requestMappingInfo);
+            requestMappingHandlerMapping
+                .unregisterMapping(RequestMappingInfo.paths(putMapping.value()).methods(RequestMethod.PUT).build());
           }
           PatchMapping patchMapping = method.getAnnotation(PatchMapping.class);
-          if (putMapping != null) {
-            PatternsRequestCondition patternsRequestCondition = new PatternsRequestCondition(patchMapping.value());
-            RequestMethodsRequestCondition requestMethodsRequestCondition = new RequestMethodsRequestCondition(
-                RequestMethod.PATCH);
-            RequestMappingInfo requestMappingInfo = new RequestMappingInfo(patternsRequestCondition,
-                requestMethodsRequestCondition, null, null, null, null, null);
-            requestMappingHandlerMapping.unregisterMapping(requestMappingInfo);
+          if (patchMapping != null) {
+            requestMappingHandlerMapping
+                .unregisterMapping(RequestMappingInfo.paths(putMapping.value()).methods(RequestMethod.PATCH).build());
           }
         });
     deleteBean(beanName);
