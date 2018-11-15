@@ -62,6 +62,11 @@ public class BeanController {
     return dynamicbeanloadService.registerMapping(beanName);
   }
 
+  @DeleteMapping("/mappings/{beanName}")
+  public void delControllerBean(@PathVariable String beanName) {
+    dynamicbeanloadService.unRegisterMapping(beanName);
+  }
+
   @GetMapping("/mappings")
   public Object mappings() {
     return dynamicbeanloadService.getMappings();

@@ -22,11 +22,19 @@ import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.core.annotation.AnnotationUtils;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.Mapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.condition.PatternsRequestCondition;
+import org.springframework.web.servlet.mvc.condition.RequestMethodsRequestCondition;
+import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 @Service
@@ -88,13 +96,9 @@ public class DynamicbeanloadService implements ApplicationContextAware {
 
   public void updateBean(String beanName) {
     try {
-      URLClassLoader urlClassLoader = URLClassLoader
-          .newInstance(new URL[]{new URL("file:\\D:\\juggling-simple-5.jar")});
-      beanFactory.setBeanClassLoader(urlClassLoader);
+      loadJars(new URL("file:\\D:\\juggling-simple-2.jar"));
     } catch (MalformedURLException e) {
       e.printStackTrace();
-      logger.error(e.getMessage(), e);
-      throw new RuntimeException(e);
     }
     addBean(beanName);
   }
@@ -147,18 +151,166 @@ public class DynamicbeanloadService implements ApplicationContextAware {
         .filter(
             method -> Arrays.stream(method.getAnnotations())
                 .anyMatch(
-                    annotation -> annotation.annotationType().isAnnotationPresent(Mapping.class)))
+                    annotation -> annotation.annotationType().isAnnotationPresent(RequestMapping.class) || annotation
+                        .annotationType().equals(RequestMapping.class)))
         .map(method -> {
           Map<String, Object> info = new HashMap<>();
-          //TODO
-          RequestMapping annotation = method.getAnnotation(RequestMapping.class);
-          info.put("pattern", annotation.value());
-          info.put("method", annotation.method());
-          info.put("path", annotation.path());
+          RequestMapping requestMapping = method.getAnnotation(RequestMapping.class);
+          if (requestMapping != null) {
+            info.put("pattern", requestMapping.value());
+            if (requestMapping.method().length > 0) {
+              info.put("method", Arrays.stream(requestMapping.method()).map(m -> m.name()).toArray());
+            } else {
+              info.put("method", Arrays.stream(HttpMethod.values()).map(m -> m.name()).toArray());
+            }
+            info.put("path", requestMapping.path());
+            PatternsRequestCondition patternsRequestCondition = new PatternsRequestCondition(requestMapping.value());
+            RequestMethodsRequestCondition requestMethodsRequestCondition = new RequestMethodsRequestCondition(
+                RequestMethod.values());
+            RequestMappingInfo requestMappingInfo = new RequestMappingInfo(patternsRequestCondition,
+                requestMethodsRequestCondition, null, null, null, null, null);
+            requestMappingHandlerMapping.registerMapping(requestMappingInfo, beanName, method);
+            return info;
+          }
+          GetMapping getMapping = method.getAnnotation(GetMapping.class);
+          if (getMapping != null) {
+            info.put("pattern", getMapping.value());
+            info.put("method", HttpMethod.GET.name());
+            info.put("path", getMapping.path());
+            PatternsRequestCondition patternsRequestCondition = new PatternsRequestCondition(getMapping.value());
+            RequestMethodsRequestCondition requestMethodsRequestCondition = new RequestMethodsRequestCondition(
+                RequestMethod.GET);
+            RequestMappingInfo requestMappingInfo = new RequestMappingInfo(patternsRequestCondition,
+                requestMethodsRequestCondition, null, null, null, null, null);
+            requestMappingHandlerMapping.registerMapping(requestMappingInfo, beanName, method);
+            return info;
+          }
+          PostMapping postMapping = method.getAnnotation(PostMapping.class);
+          if (postMapping != null) {
+            info.put("pattern", postMapping.value());
+            info.put("method", HttpMethod.POST.name());
+            info.put("path", postMapping.path());
+            PatternsRequestCondition patternsRequestCondition = new PatternsRequestCondition(postMapping.value());
+            RequestMethodsRequestCondition requestMethodsRequestCondition = new RequestMethodsRequestCondition(
+                RequestMethod.POST);
+            RequestMappingInfo requestMappingInfo = new RequestMappingInfo(patternsRequestCondition,
+                requestMethodsRequestCondition, null, null, null, null, null);
+            requestMappingHandlerMapping.registerMapping(requestMappingInfo, beanName, method);
+            return info;
+          }
+          DeleteMapping deleteMapping = method.getAnnotation(DeleteMapping.class);
+          if (deleteMapping != null) {
+            info.put("pattern", deleteMapping.value());
+            info.put("method", HttpMethod.DELETE.name());
+            info.put("path", deleteMapping.path());
+            PatternsRequestCondition patternsRequestCondition = new PatternsRequestCondition(deleteMapping.value());
+            RequestMethodsRequestCondition requestMethodsRequestCondition = new RequestMethodsRequestCondition(
+                RequestMethod.DELETE);
+            RequestMappingInfo requestMappingInfo = new RequestMappingInfo(patternsRequestCondition,
+                requestMethodsRequestCondition, null, null, null, null, null);
+            requestMappingHandlerMapping.registerMapping(requestMappingInfo, beanName, method);
+            return info;
+          }
+          PutMapping putMapping = method.getAnnotation(PutMapping.class);
+          if (putMapping != null) {
+            info.put("pattern", putMapping.value());
+            info.put("method", HttpMethod.PUT.name());
+            info.put("path", putMapping.path());
+            PatternsRequestCondition patternsRequestCondition = new PatternsRequestCondition(putMapping.value());
+            RequestMethodsRequestCondition requestMethodsRequestCondition = new RequestMethodsRequestCondition(
+                RequestMethod.PUT);
+            RequestMappingInfo requestMappingInfo = new RequestMappingInfo(patternsRequestCondition,
+                requestMethodsRequestCondition, null, null, null, null, null);
+            requestMappingHandlerMapping.registerMapping(requestMappingInfo, beanName, method);
+            return info;
+          }
+          PatchMapping patchMapping = method.getAnnotation(PatchMapping.class);
+          if (putMapping != null) {
+            info.put("pattern", patchMapping.value());
+            info.put("method", HttpMethod.PATCH.name());
+            info.put("path", patchMapping.path());
+            PatternsRequestCondition patternsRequestCondition = new PatternsRequestCondition(patchMapping.value());
+            RequestMethodsRequestCondition requestMethodsRequestCondition = new RequestMethodsRequestCondition(
+                RequestMethod.PATCH);
+            RequestMappingInfo requestMappingInfo = new RequestMappingInfo(patternsRequestCondition,
+                requestMethodsRequestCondition, null, null, null, null, null);
+            requestMappingHandlerMapping.registerMapping(requestMappingInfo, beanName, method);
+            return info;
+          }
           return info;
         }).collect(
             Collectors.toList()));
     return item;
+  }
+
+  public void unRegisterMapping(String beanName) {
+    if (!beanFactory.containsBean(beanName)) {
+      return;
+    }
+    Object bean = beanFactory.getBean(beanName);
+    Arrays.stream(bean.getClass().getMethods())
+        .filter(
+            method -> Arrays.stream(method.getAnnotations())
+                .anyMatch(
+                    annotation -> annotation.annotationType().isAnnotationPresent(RequestMapping.class) || annotation
+                        .annotationType().equals(RequestMapping.class)))
+        .forEach(method -> {
+          RequestMapping requestMapping = method.getAnnotation(RequestMapping.class);
+          if (requestMapping != null) {
+            PatternsRequestCondition patternsRequestCondition = new PatternsRequestCondition(requestMapping.value());
+            RequestMethodsRequestCondition requestMethodsRequestCondition = new RequestMethodsRequestCondition(
+                RequestMethod.values());
+            RequestMappingInfo requestMappingInfo = new RequestMappingInfo(patternsRequestCondition,
+                requestMethodsRequestCondition, null, null, null, null, null);
+            requestMappingHandlerMapping.unregisterMapping(requestMappingInfo);
+          }
+          GetMapping getMapping = method.getAnnotation(GetMapping.class);
+          if (getMapping != null) {
+            PatternsRequestCondition patternsRequestCondition = new PatternsRequestCondition(getMapping.value());
+            RequestMethodsRequestCondition requestMethodsRequestCondition = new RequestMethodsRequestCondition(
+                RequestMethod.GET);
+            RequestMappingInfo requestMappingInfo = new RequestMappingInfo(patternsRequestCondition,
+                requestMethodsRequestCondition, null, null, null, null, null);
+            requestMappingHandlerMapping.unregisterMapping(requestMappingInfo);
+          }
+          PostMapping postMapping = method.getAnnotation(PostMapping.class);
+          if (postMapping != null) {
+            PatternsRequestCondition patternsRequestCondition = new PatternsRequestCondition(postMapping.value());
+            RequestMethodsRequestCondition requestMethodsRequestCondition = new RequestMethodsRequestCondition(
+                RequestMethod.POST);
+            RequestMappingInfo requestMappingInfo = new RequestMappingInfo(patternsRequestCondition,
+                requestMethodsRequestCondition, null, null, null, null, null);
+            requestMappingHandlerMapping.unregisterMapping(requestMappingInfo);
+          }
+          DeleteMapping deleteMapping = method.getAnnotation(DeleteMapping.class);
+          if (deleteMapping != null) {
+            PatternsRequestCondition patternsRequestCondition = new PatternsRequestCondition(deleteMapping.value());
+            RequestMethodsRequestCondition requestMethodsRequestCondition = new RequestMethodsRequestCondition(
+                RequestMethod.DELETE);
+            RequestMappingInfo requestMappingInfo = new RequestMappingInfo(patternsRequestCondition,
+                requestMethodsRequestCondition, null, null, null, null, null);
+            requestMappingHandlerMapping.unregisterMapping(requestMappingInfo);
+          }
+          PutMapping putMapping = method.getAnnotation(PutMapping.class);
+          if (putMapping != null) {
+            PatternsRequestCondition patternsRequestCondition = new PatternsRequestCondition(putMapping.value());
+            RequestMethodsRequestCondition requestMethodsRequestCondition = new RequestMethodsRequestCondition(
+                RequestMethod.PUT);
+            RequestMappingInfo requestMappingInfo = new RequestMappingInfo(patternsRequestCondition,
+                requestMethodsRequestCondition, null, null, null, null, null);
+            requestMappingHandlerMapping.unregisterMapping(requestMappingInfo);
+          }
+          PatchMapping patchMapping = method.getAnnotation(PatchMapping.class);
+          if (putMapping != null) {
+            PatternsRequestCondition patternsRequestCondition = new PatternsRequestCondition(patchMapping.value());
+            RequestMethodsRequestCondition requestMethodsRequestCondition = new RequestMethodsRequestCondition(
+                RequestMethod.PATCH);
+            RequestMappingInfo requestMappingInfo = new RequestMappingInfo(patternsRequestCondition,
+                requestMethodsRequestCondition, null, null, null, null, null);
+            requestMappingHandlerMapping.unregisterMapping(requestMappingInfo);
+          }
+        });
+    deleteBean(beanName);
   }
 
   public Object getMappings() {
@@ -176,14 +328,9 @@ public class DynamicbeanloadService implements ApplicationContextAware {
     this.beanFactory = (DefaultListableBeanFactory) configurableApplicationContext
         .getBeanFactory();
     try {
-      // 使用URLClassLoader
-      URLClassLoader urlClassLoader = URLClassLoader
-          .newInstance(new URL[]{new URL("file:\\D:\\juggling-simple-7.jar")});
-      beanFactory.setBeanClassLoader(urlClassLoader);
+      loadJars(new URL("file:\\D:\\juggling-simple-2.jar"));
     } catch (MalformedURLException e) {
       e.printStackTrace();
-      logger.error(e.getMessage(), e);
-      throw new RuntimeException(e);
     }
 
     /*String beanName = "dynamicService";
@@ -227,6 +374,15 @@ public class DynamicbeanloadService implements ApplicationContextAware {
     } catch (InvocationTargetException e) {
       e.printStackTrace();
     }*/
+  }
+
+  private void loadJars(URL... urls) {
+    if (urls.length == 0) {
+      return;
+    }
+    // 使用URLClassLoader
+    URLClassLoader urlClassLoader = URLClassLoader.newInstance(urls);
+    this.beanFactory.setBeanClassLoader(urlClassLoader);
   }
 
   public Object getAService() {

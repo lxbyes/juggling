@@ -1,20 +1,9 @@
 package me.leckie.dynamicbeanload.service;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
+import me.leckie.juggling.facade.listener.PostConstructAndPreDestroyListener;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DynamicService {
+public class DynamicService implements PostConstructAndPreDestroyListener {
 
-
-  @PostConstruct
-  private void postConstruct() {
-    System.out.println("----------- " + getClass().getName() + " postConstruct");
-  }
-
-  @PreDestroy
-  private void PreDestroy() {
-    System.out.println("----------- " + getClass().getName() + " PreDestroy");
-  }
 }
