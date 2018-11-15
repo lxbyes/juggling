@@ -1,6 +1,8 @@
 package me.leckie.juggling.context.service;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -133,6 +135,18 @@ public class MultiContextTests implements BeanFactoryAware, ApplicationContextAw
     anotherContext.close();
     Assert.assertFalse(anotherContext.isActive());
     Assert.assertFalse(anotherContext.isRunning());
+  }
+
+  @Test
+  public void testSupContextBeanWithUtils()
+      throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    String beanName = "me.leckie.juggling.simple.FooService";
+    registerBeanOn(subApplicationContext, beanName);
+    Object bean = subApplicationContext.getBean(beanName);
+    Method bar = bean.getClass().getMethod("bar");
+    Method println = bean.getClass().getMethod("println");
+    bar.invoke(bean);
+    println.invoke(bean);
   }
 
   private GenericApplicationContext makeNewSubApplicationContext() throws MalformedURLException {

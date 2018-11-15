@@ -14,4 +14,11 @@ public class FooService implements PostConstructAndPreDestroyListener {
     System.out.println(" -> I'm a instance of " + getClass().getName());
   }
 
+  public void println() {
+    FooUtils.println("can load utils.");
+  }
+
+  public void bar() {
+    FooUtils.bar();
+  }
 }
