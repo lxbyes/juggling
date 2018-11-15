@@ -15,6 +15,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
@@ -61,7 +62,7 @@ public class MultiContextTests implements BeanFactoryAware, ApplicationContextAw
   @Test
   public void testRegistryOnSubContext() {
     String beanName = "me.leckie.juggling.simple.AService";
-    registerBeanOnSubRegistry(beanName);
+    registerBeanOn(subApplicationContext, beanName);
     Assert.assertFalse(applicationContext.containsBean(beanName));
     Assert.assertTrue(subApplicationContext.containsBean(beanName));
     AInterface aInterface = (AInterface) subApplicationContext.getDefaultListableBeanFactory().getBean(beanName);
@@ -71,7 +72,7 @@ public class MultiContextTests implements BeanFactoryAware, ApplicationContextAw
   @Test
   public void testRegistrySetOnSubContext() {
     String[] beanNames = {"me.leckie.juggling.simple.AService", "me.leckie.juggling.context.service.AAAService"};
-    registerBeanOnSubRegistry(beanNames);
+    registerBeanOn(subApplicationContext, beanNames);
     Map<String, AInterface> beansOfType = subApplicationContext.getBeansOfType(AInterface.class);
     Assert.assertEquals(beansOfType.size(), 2);
     Assert.assertTrue(beansOfType.containsKey(beanNames[0]));
@@ -83,7 +84,7 @@ public class MultiContextTests implements BeanFactoryAware, ApplicationContextAw
   @Test
   public void testOrder() {
     String[] beanNames = {"me.leckie.juggling.simple.AService", "me.leckie.juggling.context.service.AAAService"};
-    registerBeanOnSubRegistry(beanNames);
+    registerBeanOn(subApplicationContext, beanNames);
     Map<String, AInterface> beansOfType = subApplicationContext.getBeansOfType(AInterface.class);
     beansOfType.putAll(subApplicationContext.getParent().getBeansOfType(AInterface.class));
     List<AInterface> aInterfaceList = new ArrayList<>(beansOfType.values());
@@ -103,12 +104,22 @@ public class MultiContextTests implements BeanFactoryAware, ApplicationContextAw
   @Test
   public void testRegistryOnParentContext() {
     String beanName = "me.leckie.juggling.context.service.AAAService";
-    registerBeanOnRegistry(beanName);
+    registerBeanOn(applicationContext, beanName);
     Assert.assertTrue(applicationContext.containsBean(beanName));
     Assert.assertTrue(subApplicationContext.containsBean(beanName));
     AInterface aInterface = (AInterface) applicationContext.getBean(beanName);
     Assert.assertTrue(aInterface == subApplicationContext.getBean(beanName));
     System.out.println(aInterface.a("xiexie"));
+  }
+
+  @Test
+  public void testMultiSubContext() throws MalformedURLException {
+    GenericApplicationContext anotherContext = makeNewSubApplicationContext();
+    String[] beanNames = {"me.leckie.juggling.simple.AService", "me.leckie.juggling.context.service.AAAService"};
+    registerBeanOn(anotherContext, beanNames);
+    registerBeanOn(subApplicationContext, beanNames);
+    Assert.assertTrue(anotherContext.getBean(beanNames[0]) != subApplicationContext.getBean(beanNames[0]));
+    Assert.assertTrue(anotherContext.getBean("ABService") == subApplicationContext.getBean("ABService"));
   }
 
   private GenericApplicationContext makeNewSubApplicationContext() throws MalformedURLException {
@@ -123,16 +134,9 @@ public class MultiContextTests implements BeanFactoryAware, ApplicationContextAw
     return subApplicationContext;
   }
 
-  private void registerBeanOnRegistry(String... beanNames) {
+  private static void registerBeanOn(BeanDefinitionRegistry beanDefinitionRegistry, String... beanNames) {
     for (String beanName : beanNames) {
-      applicationContext.registerBeanDefinition(beanName,
-          BeanDefinitionBuilder.genericBeanDefinition(beanName).getBeanDefinition());
-    }
-  }
-
-  private void registerBeanOnSubRegistry(String... beanNames) {
-    for (String beanName : beanNames) {
-      subApplicationContext.registerBeanDefinition(beanName,
+      beanDefinitionRegistry.registerBeanDefinition(beanName,
           BeanDefinitionBuilder.genericBeanDefinition(beanName).getBeanDefinition());
     }
   }
