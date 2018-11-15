@@ -1,8 +1,8 @@
 package me.leckie.juggling.redis.domain;
 
 /**
- * @author laixianbo
- * @version $Id: Car.java, v0.1 2018/10/23 9:48 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: Car.java, v0.1 2018/10/23 9:48 Leckie Exp $$
  */
 public class Car extends BaseEntity {
 

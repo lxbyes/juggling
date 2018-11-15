@@ -53,7 +53,7 @@ databaseChangeLog:
 
   - changeSet:
       id: 4
-      author: laixianbo
+      author: Leckie
       changes:
         - addColumn:
             tableName: person

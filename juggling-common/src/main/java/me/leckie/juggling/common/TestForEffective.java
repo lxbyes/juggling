@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author laixianbo
- * @version $Id: TestForEffective.java, v0.1 2018/10/29 9:21 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: TestForEffective.java, v0.1 2018/10/29 9:21 Leckie Exp $$
  */
 public class TestForEffective {
 

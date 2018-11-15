@@ -6,8 +6,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 /**
- * @author laixianbo
- * @version $Id: UserCacheServiceImpl.java, v0.1 2018/10/23 14:06 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: UserCacheServiceImpl.java, v0.1 2018/10/23 14:06 Leckie Exp $$
  */
 @Service
 public class UserCacheServiceImpl implements UserCacheService {

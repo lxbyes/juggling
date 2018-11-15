@@ -11,8 +11,8 @@ import java.util.UUID;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
- * @author laixianbo
- * @version $Id: BaseEntity.java, v0.1 2018/10/23 9:42 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: BaseEntity.java, v0.1 2018/10/23 9:42 Leckie Exp $$
  */
 public class BaseEntity implements Serializable {
 

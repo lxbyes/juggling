@@ -4,8 +4,8 @@ import java.util.Optional;
 import java.util.function.Supplier;
 
 /**
- * @author laixianbo
- * @version $Id: ModernNPESafeSample.java, v0.1 2018/10/30 9:41 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: ModernNPESafeSample.java, v0.1 2018/10/30 9:41 Leckie Exp $$
  */
 public class ModernNPESafeSample {
 

@@ -11,8 +11,8 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
- * @author laixianbo
- * @version $Id: EmbdedIndexControllerTests.java, v0.1 2018/8/17 15:26 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: EmbdedIndexControllerTests.java, v0.1 2018/8/17 15:26 Leckie Exp $$
  */
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @RunWith(SpringRunner.class)

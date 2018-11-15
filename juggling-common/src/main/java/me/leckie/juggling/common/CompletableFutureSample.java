@@ -8,8 +8,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
 /**
- * @author laixianbo
- * @version $Id: CompletableFutureSample.java, v0.1 2018/10/30 14:46 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: CompletableFutureSample.java, v0.1 2018/10/30 14:46 Leckie Exp $$
  */
 public class CompletableFutureSample {
 

@@ -4,8 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * @author laixianbo
- * @version $Id: LiquibaseApplication.java, v0.1 2018/11/8 18:27 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: LiquibaseApplication.java, v0.1 2018/11/8 18:27 Leckie Exp $$
  */
 @SpringBootApplication
 public class LiquibaseApplication {

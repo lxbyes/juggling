@@ -4,8 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * @author laixianbo
- * @version $Id: AutowiredApplication.java, v0.1 2018/11/12 11:03 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: AutowiredApplication.java, v0.1 2018/11/12 11:03 Leckie Exp $$
  */
 @SpringBootApplication
 public class AutowiredApplication {

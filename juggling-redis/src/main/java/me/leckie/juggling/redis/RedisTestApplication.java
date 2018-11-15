@@ -4,8 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * @author laixianbo
- * @version $Id: RedisTestApplication.java, v0.1 2018/10/23 9:38 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: RedisTestApplication.java, v0.1 2018/10/23 9:38 Leckie Exp $$
  */
 @SpringBootApplication
 public class RedisTestApplication {

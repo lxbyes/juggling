@@ -7,8 +7,8 @@ import lombok.Data;
 import me.leckie.juggling.treasure.model.Gender;
 
 /**
- * @author laixianbo
- * @version $Id: TreasureDO.java, v0.1 2018/8/17 16:44 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: TreasureDO.java, v0.1 2018/8/17 16:44 Leckie Exp $$
  */
 @Entity
 @Table(name = "treasure")

@@ -8,8 +8,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
- * @author laixianbo
- * @version $Id: JdbcHiveTests.java, v0.1 2018/8/21 14:55 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: JdbcHiveTests.java, v0.1 2018/8/21 14:55 Leckie Exp $$
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest

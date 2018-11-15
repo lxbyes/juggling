@@ -7,8 +7,8 @@ import java.util.concurrent.TimeUnit;
 import org.springframework.data.redis.core.RedisTemplate;
 
 /**
- * @author laixianbo
- * @version $Id: CacheService.java, v0.1 2018/10/23 9:49 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: CacheService.java, v0.1 2018/10/23 9:49 Leckie Exp $$
  */
 public interface CacheService<K, T extends Serializable> {
 

@@ -11,8 +11,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.test.web.servlet.MockMvc;
 
 /**
- * @author laixianbo
- * @version $Id: IndexControllerTests.java, v0.1 2018/8/17 14:42 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: IndexControllerTests.java, v0.1 2018/8/17 14:42 Leckie Exp $$
  */
 @AutoConfigureMockMvc
 public class IndexControllerTests extends BaseUnitTests {

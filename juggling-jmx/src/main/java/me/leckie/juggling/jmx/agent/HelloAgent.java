@@ -18,8 +18,8 @@ import javax.management.remote.JMXServiceURL;
 import me.leckie.juggling.jmx.bean.HelloWorld;
 
 /**
- * @author laixianbo
- * @version $Id: HelloAgent.java, v0.1 2018/10/24 14:43 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: HelloAgent.java, v0.1 2018/10/24 14:43 Leckie Exp $$
  */
 public class HelloAgent implements NotificationListener {
 

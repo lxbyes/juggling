@@ -7,8 +7,8 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /**
- * @author laixianbo
- * @version $Id: StreamSample.java, v0.1 2018/10/29 14:24 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: StreamSample.java, v0.1 2018/10/29 14:24 Leckie Exp $$
  */
 public class StreamSample {
 

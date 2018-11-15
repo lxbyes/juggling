@@ -16,8 +16,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 /**
- * @author laixianbo
- * @version $Id: TreasureControllerTests.java, v0.1 2018/8/17 16:14 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: TreasureControllerTests.java, v0.1 2018/8/17 16:14 Leckie Exp $$
  */
 @RunWith(SpringRunner.class)
 @WebMvcTest(TreasureController.class)

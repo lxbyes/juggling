@@ -4,8 +4,8 @@ import me.leckie.juggling.facade.BInterface;
 import org.springframework.stereotype.Service;
 
 /**
- * @author laixianbo
- * @version $Id: BService.java, v0.1 2018/11/13 14:56 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: BService.java, v0.1 2018/11/13 14:56 Leckie Exp $$
  */
 @Service
 public class BService implements BInterface {

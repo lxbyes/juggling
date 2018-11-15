@@ -3,8 +3,8 @@ package me.leckie.juggling.jmx.bean;
 import me.leckie.juggling.jmx.mbean.HelloWorldMBean;
 
 /**
- * @author laixianbo
- * @version $Id: HelloWorld.java, v0.1 2018/10/24 14:42 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: HelloWorld.java, v0.1 2018/10/24 14:42 Leckie Exp $$
  */
 public class HelloWorld implements HelloWorldMBean {
 

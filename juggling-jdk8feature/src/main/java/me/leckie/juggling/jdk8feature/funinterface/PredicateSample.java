@@ -3,8 +3,8 @@ package me.leckie.juggling.jdk8feature.funinterface;
 import java.util.function.Predicate;
 
 /**
- * @author laixianbo
- * @version $Id: PredicateSample.java, v0.1 2018/10/24 18:01 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: PredicateSample.java, v0.1 2018/10/24 18:01 Leckie Exp $$
  */
 public class PredicateSample {
 

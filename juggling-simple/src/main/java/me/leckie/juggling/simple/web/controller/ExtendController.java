@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @author laixianbo
- * @version $Id: ExtendController.java, v0.1 2018/11/13 15:47 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: ExtendController.java, v0.1 2018/11/13 15:47 Leckie Exp $$
  */
 @RestController
 @RequestMapping("/others")

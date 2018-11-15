@@ -1,9 +1,12 @@
 package me.leckie.juggling.context.service;
 
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import me.leckie.juggling.context.comparator.AInterfaceComparator;
 import me.leckie.juggling.facade.AInterface;
 import org.junit.Assert;
 import org.junit.Test;
@@ -22,8 +25,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.context.support.GenericWebApplicationContext;
 
 /**
- * @author laixianbo
- * @version $Id: MultiContextTests.java, v0.1 2018/11/15 14:24 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: MultiContextTests.java, v0.1 2018/11/15 14:24 Leckie Exp $$
  */
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -44,7 +47,7 @@ public class MultiContextTests implements BeanFactoryAware, ApplicationContextAw
   public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
     this.applicationContext = (GenericWebApplicationContext) applicationContext;
     try {
-      makeNewSubApplicationContext();
+      this.subApplicationContext = makeNewSubApplicationContext();
     } catch (MalformedURLException e) {
       e.printStackTrace();
     }
@@ -66,7 +69,39 @@ public class MultiContextTests implements BeanFactoryAware, ApplicationContextAw
   }
 
   @Test
-  public void testRegistryOnParentContext() throws IOException {
+  public void testRegistrySetOnSubContext() {
+    String[] beanNames = {"me.leckie.juggling.simple.AService", "me.leckie.juggling.context.service.AAAService"};
+    registerBeanOnSubRegistry(beanNames);
+    Map<String, AInterface> beansOfType = subApplicationContext.getBeansOfType(AInterface.class);
+    Assert.assertEquals(beansOfType.size(), 2);
+    Assert.assertTrue(beansOfType.containsKey(beanNames[0]));
+    Assert.assertTrue(beansOfType.containsKey(beanNames[1]));
+    beansOfType.forEach((k, v) -> System.out.println(v.a(k)));
+    System.out.println(subApplicationContext.getParent().getBeansOfType(AInterface.class));
+  }
+
+  @Test
+  public void testOrder() {
+    String[] beanNames = {"me.leckie.juggling.simple.AService", "me.leckie.juggling.context.service.AAAService"};
+    registerBeanOnSubRegistry(beanNames);
+    Map<String, AInterface> beansOfType = subApplicationContext.getBeansOfType(AInterface.class);
+    beansOfType.putAll(subApplicationContext.getParent().getBeansOfType(AInterface.class));
+    List<AInterface> aInterfaceList = new ArrayList<>(beansOfType.values());
+    aInterfaceList.sort(AInterfaceComparator.getInstance());
+    System.out.println(aInterfaceList);
+  }
+
+  @Test
+  public void testContainsLocalBean() {
+    String beanName = "ABService";
+    Assert.assertTrue(subApplicationContext.getParent().containsLocalBean(beanName));
+    Assert.assertFalse(subApplicationContext.containsLocalBean(beanName));
+    Assert.assertTrue(subApplicationContext.getParent().containsBean(beanName));
+    Assert.assertTrue(subApplicationContext.containsBean(beanName));
+  }
+
+  @Test
+  public void testRegistryOnParentContext() {
     String beanName = "me.leckie.juggling.context.service.AAAService";
     registerBeanOnRegistry(beanName);
     Assert.assertTrue(applicationContext.containsBean(beanName));
@@ -76,9 +111,8 @@ public class MultiContextTests implements BeanFactoryAware, ApplicationContextAw
     System.out.println(aInterface.a("xiexie"));
   }
 
-  private void makeNewSubApplicationContext() throws MalformedURLException {
+  private GenericApplicationContext makeNewSubApplicationContext() throws MalformedURLException {
     GenericApplicationContext subApplicationContext = new AnnotationConfigApplicationContext();
-    this.subApplicationContext = subApplicationContext;
     subApplicationContext.setParent(applicationContext);
     URLClassLoader urlClassLoader = URLClassLoader.newInstance(
         new URL[]{new URL("file:\\D:\\juggling-simple-2.jar"), new URL("file:\\D:\\juggling-simple-1.jar")});
@@ -86,6 +120,7 @@ public class MultiContextTests implements BeanFactoryAware, ApplicationContextAw
     subApplicationContext.setAllowBeanDefinitionOverriding(true);
     subApplicationContext.refresh();
     subApplicationContext.start();
+    return subApplicationContext;
   }
 
   private void registerBeanOnRegistry(String... beanNames) {

@@ -5,8 +5,8 @@ import me.leckie.juggling.treasure.service.TreasureService;
 import org.springframework.stereotype.Service;
 
 /**
- * @author laixianbo
- * @version $Id: TreasureServiceImpl.java, v0.1 2018/8/17 17:00 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: TreasureServiceImpl.java, v0.1 2018/8/17 17:00 Leckie Exp $$
  */
 @Service
 public class TreasureServiceImpl implements TreasureService {

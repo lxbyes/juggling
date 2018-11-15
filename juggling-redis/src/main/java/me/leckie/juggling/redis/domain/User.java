@@ -9,8 +9,8 @@ import java.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
- * @author laixianbo
- * @version $Id: User.java, v0.1 2018/10/23 9:46 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: User.java, v0.1 2018/10/23 9:46 Leckie Exp $$
  */
 public class User extends BaseEntity {
 

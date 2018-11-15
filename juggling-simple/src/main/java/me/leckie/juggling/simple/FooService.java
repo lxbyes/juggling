@@ -4,8 +4,8 @@ import me.leckie.juggling.facade.listener.PostConstructAndPreDestroyListener;
 import org.springframework.stereotype.Service;
 
 /**
- * @author laixianbo
- * @version $Id: SimpleService.java, v0.1 2018/11/13 10:15 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: SimpleService.java, v0.1 2018/11/13 10:15 Leckie Exp $$
  */
 @Service
 public class FooService implements PostConstructAndPreDestroyListener {

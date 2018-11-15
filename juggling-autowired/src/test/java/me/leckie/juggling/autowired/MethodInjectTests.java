@@ -8,8 +8,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
- * @author laixianbo
- * @version $Id: MethodInjectTests.java, v0.1 2018/11/12 11:09 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: MethodInjectTests.java, v0.1 2018/11/12 11:09 Leckie Exp $$
  */
 @SpringBootTest
 @RunWith(SpringRunner.class)

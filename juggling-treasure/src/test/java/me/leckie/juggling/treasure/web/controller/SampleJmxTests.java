@@ -9,8 +9,8 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
- * @author laixianbo
- * @version $Id: SampleJmxTests.java, v0.1 2018/8/17 15:31 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: SampleJmxTests.java, v0.1 2018/8/17 15:31 Leckie Exp $$
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(properties = "spring.jmx.enabled=true")

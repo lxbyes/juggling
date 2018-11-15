@@ -6,8 +6,8 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
- * @author laixianbo
- * @version $Id: Treasure.java, v0.1 2018/8/17 16:07 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: Treasure.java, v0.1 2018/8/17 16:07 Leckie Exp $$
  */
 public class Treasure implements Serializable {
 

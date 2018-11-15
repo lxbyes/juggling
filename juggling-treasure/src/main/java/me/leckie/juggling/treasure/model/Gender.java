@@ -1,8 +1,8 @@
 package me.leckie.juggling.treasure.model;
 
 /**
- * @author laixianbo
- * @version $Id: Gender.java, v0.1 2018/8/17 16:08 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: Gender.java, v0.1 2018/8/17 16:08 Leckie Exp $$
  */
 public enum Gender {
   MALE("男"), FEMALE("女");

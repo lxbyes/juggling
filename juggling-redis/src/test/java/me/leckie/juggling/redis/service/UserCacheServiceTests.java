@@ -13,8 +13,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * @author laixianbo
- * @version $Id: UserCacheServiceTests.java, v0.1 2018/10/23 14:12 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: UserCacheServiceTests.java, v0.1 2018/10/23 14:12 Leckie Exp $$
  */
 public class UserCacheServiceTests extends UnitTestBase {
 

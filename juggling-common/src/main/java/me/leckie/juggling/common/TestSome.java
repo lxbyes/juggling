@@ -7,8 +7,8 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * @author laixianbo
- * @version $Id: TestSome.java, v0.1 2018/10/26 13:51 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: TestSome.java, v0.1 2018/10/26 13:51 Leckie Exp $$
  */
 public class TestSome {
 

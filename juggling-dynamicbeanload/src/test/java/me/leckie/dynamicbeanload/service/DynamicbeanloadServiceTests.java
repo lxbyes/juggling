@@ -8,8 +8,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
- * @author laixianbo
- * @version $Id: DynamicbeanloadServiceTests.java, v0.1 2018/11/14 11:57 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: DynamicbeanloadServiceTests.java, v0.1 2018/11/14 11:57 Leckie Exp $$
  */
 @SpringBootTest
 @RunWith(SpringRunner.class)

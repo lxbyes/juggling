@@ -4,8 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * @author laixianbo
- * @version $Id: FlywayApplication.java, v0.1 2018/11/8 15:53 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: FlywayApplication.java, v0.1 2018/11/8 15:53 Leckie Exp $$
  */
 @SpringBootApplication
 public class FlywayApplication {

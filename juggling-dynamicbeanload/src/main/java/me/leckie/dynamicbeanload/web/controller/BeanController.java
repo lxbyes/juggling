@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @author laixianbo
- * @version $Id: BeanController.java, v0.1 2018/11/13 10:55 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: BeanController.java, v0.1 2018/11/13 10:55 Leckie Exp $$
  */
 @RestController
 @RequestMapping("/beans")

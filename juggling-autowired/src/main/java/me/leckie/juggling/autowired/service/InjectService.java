@@ -6,8 +6,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
- * @author laixianbo
- * @version $Id: InjectService.java, v0.1 2018/11/12 11:05 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: InjectService.java, v0.1 2018/11/12 11:05 Leckie Exp $$
  */
 @Service
 public class InjectService {

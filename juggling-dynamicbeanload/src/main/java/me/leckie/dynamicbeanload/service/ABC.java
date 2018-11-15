@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * @author laixianbo
- * @version $Id: ABC.java, v0.1 2018/11/14 10:53 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: ABC.java, v0.1 2018/11/14 10:53 Leckie Exp $$
  */
 @Service
 public class ABC {

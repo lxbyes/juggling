@@ -3,8 +3,8 @@ package me.leckie.juggling.jdk8feature.funinterface;
 import java.io.Serializable;
 
 /**
- * @author laixianbo
- * @version $Id: Employee.java, v0.1 2018/10/24 18:18 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: Employee.java, v0.1 2018/10/24 18:18 Leckie Exp $$
  */
 public class Employee implements Serializable {
 

@@ -3,8 +3,8 @@ package me.leckie.juggling.facade.listener;
 import javax.annotation.PreDestroy;
 
 /**
- * @author laixianbo
- * @version $Id: PreDestroyListener.java, v0.1 2018/11/14 16:17 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: PreDestroyListener.java, v0.1 2018/11/14 16:17 Leckie Exp $$
  */
 public interface PreDestroyListener {
 

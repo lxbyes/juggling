@@ -3,8 +3,8 @@ package me.leckie.juggling.treasure.domain.dataobject;
 import java.util.List;
 
 /**
- * @author laixianbo
- * @version $Id: PostmanActiviti.java, v0.1 2018/9/12 14:05 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: PostmanActiviti.java, v0.1 2018/9/12 14:05 Leckie Exp $$
  */
 public class PostmanActiviti {
 

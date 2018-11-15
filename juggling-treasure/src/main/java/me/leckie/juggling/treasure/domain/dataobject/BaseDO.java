@@ -14,8 +14,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 /**
- * @author laixianbo
- * @version $Id: BaseDO.java, v0.1 2018/8/17 16:36 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: BaseDO.java, v0.1 2018/8/17 16:36 Leckie Exp $$
  */
 @MappedSuperclass
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)

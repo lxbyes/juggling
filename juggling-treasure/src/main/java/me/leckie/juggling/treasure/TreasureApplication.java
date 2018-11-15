@@ -4,8 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * @author laixianbo
- * @version $Id: TreasureApplication.java, v0.1 2018/8/17 13:59 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: TreasureApplication.java, v0.1 2018/8/17 13:59 Leckie Exp $$
  */
 @SpringBootApplication
 public class TreasureApplication {

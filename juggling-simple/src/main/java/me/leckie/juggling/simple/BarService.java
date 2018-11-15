@@ -5,8 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * @author laixianbo
- * @version $Id: BarService.java, v0.1 2018/11/13 10:18 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: BarService.java, v0.1 2018/11/13 10:18 Leckie Exp $$
  */
 @Service
 public class BarService implements PostConstructAndPreDestroyListener {

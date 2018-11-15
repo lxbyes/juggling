@@ -9,8 +9,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * @author laixianbo
- * @version $Id: AdminApplication.java, v0.1 2018/11/9 10:06 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: AdminApplication.java, v0.1 2018/11/9 10:06 Leckie Exp $$
  */
 @SpringBootApplication
 @EnableAdminServer
