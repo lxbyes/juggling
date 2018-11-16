@@ -1,7 +1,11 @@
 server:
   port: 8808
-management:
+# management:
   endpoints:
     web:
       exposure:
         include: "*"
+
+logging:
+  level:
+    org.springframework.web.servlet.mvc: TRACE
