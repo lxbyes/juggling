@@ -17,6 +17,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
+import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
@@ -149,8 +150,29 @@ public class MultiContextTests implements BeanFactoryAware, ApplicationContextAw
     println.invoke(bean);
   }
 
+  @Test
+  public void testScanPackages() throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+    AnnotationConfigApplicationContext annotationConfigApplicationContext = (AnnotationConfigApplicationContext) subApplicationContext;
+    annotationConfigApplicationContext.scan("me.leckie.juggling");
+    String beanName = "fooService";
+    Object bean = subApplicationContext.getBean(beanName);
+    Method bar = bean.getClass().getMethod("bar");
+    bar.invoke(bean);
+  }
+
+  @Test(expected = NoSuchBeanDefinitionException.class)
+  public void testScanPackagesNoSuchBean()
+      throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+    AnnotationConfigApplicationContext annotationConfigApplicationContext = (AnnotationConfigApplicationContext) subApplicationContext;
+    annotationConfigApplicationContext.scan("no.this.package");
+    String beanName = "fooService";
+    Object bean = subApplicationContext.getBean(beanName);
+    Method bar = bean.getClass().getMethod("bar");
+    bar.invoke(bean);
+  }
+
   private GenericApplicationContext makeNewSubApplicationContext() throws MalformedURLException {
-    GenericApplicationContext subApplicationContext = new AnnotationConfigApplicationContext();
+    AnnotationConfigApplicationContext subApplicationContext = new AnnotationConfigApplicationContext();
     subApplicationContext.setParent(applicationContext);
     URLClassLoader urlClassLoader = URLClassLoader.newInstance(
         new URL[]{new URL("file:\\D:\\juggling-simple-2.jar"), new URL("file:\\D:\\juggling-simple-1.jar")});
