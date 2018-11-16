@@ -18,9 +18,9 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
+import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
-import org.springframework.beans.factory.support.DefaultBeanNameGenerator;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
@@ -29,7 +29,9 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.AnnotationBeanNameGenerator;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.GenericApplicationContext;
+import org.springframework.core.io.Resource;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.util.ClassUtils;
 import org.springframework.web.context.support.GenericWebApplicationContext;
 
 /**
@@ -214,6 +216,31 @@ public class MultiContextTests implements BeanFactoryAware, ApplicationContextAw
     annotationConfigApplicationContext.scan("me.leckie.juggling.simple");
     String beanName = "ABService";
     Assert.assertTrue(applicationContext.getBean(beanName) == annotationConfigApplicationContext.getBean(beanName));
+  }
+
+  @Test
+  public void testLoadConfigResource() throws InvocationTargetException, IllegalAccessException, IOException {
+    AnnotationConfigApplicationContext annotationConfigApplicationContext = (AnnotationConfigApplicationContext) subApplicationContext;
+    annotationConfigApplicationContext.scan("me.leckie.juggling.simple");
+    String beanName = "configValueService";
+    Object bean = annotationConfigApplicationContext.getBean(beanName);
+    Method say = ClassUtils.getMethod(bean.getClass(), "say");
+    say.invoke(bean);
+    System.out.println("---------------------------------");
+    Resource resource = annotationConfigApplicationContext.getResource("classpath:application-expansion.yaml");
+    YamlPropertiesFactoryBean yamlPropertiesFactoryBean = new YamlPropertiesFactoryBean();
+    yamlPropertiesFactoryBean.setResources(resource);
+    yamlPropertiesFactoryBean.getObject().forEach((k, v) -> System.out.println(k + ": " + v));
+  }
+
+  @Test
+  public void testReadResourceValue() throws InvocationTargetException, IllegalAccessException {
+    AnnotationConfigApplicationContext annotationConfigApplicationContext = (AnnotationConfigApplicationContext) subApplicationContext;
+    annotationConfigApplicationContext.scan("me.leckie.juggling.simple");
+    String beanName = "configValueService";
+    Object bean = annotationConfigApplicationContext.getBean(beanName);
+    Method say = ClassUtils.getMethod(bean.getClass(), "say");
+    say.invoke(bean);
   }
 
   private GenericApplicationContext newSubApplicationContext() throws MalformedURLException {

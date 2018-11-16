@@ -9,3 +9,13 @@ server:
 logging:
   level:
     org.springframework.web.servlet.mvc: TRACE
+
+me:
+  leckie:
+    hello:
+      world: Hello, World from context application yaml ...
+spring:
+  profiles:
+    include: classpath*:application-expansion.yaml
+    active: expansion
+
