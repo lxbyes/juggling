@@ -5,8 +5,8 @@ import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanNameGenerator;
 
 /**
- * @author laixianbo
- * @version $Id: CustomBeanNameGenerator.java, v0.1 2018/11/19 14:44 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: CustomBeanNameGenerator.java, v0.1 2018/11/19 14:44 Leckie Exp $$
  */
 public class CustomBeanNameGenerator implements BeanNameGenerator {
 

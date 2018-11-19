@@ -5,8 +5,8 @@ import me.leckie.juggling.facade.AInterface;
 import org.springframework.core.annotation.Order;
 
 /**
- * @author laixianbo
- * @version $Id: AInterfaceComparator.java, v0.1 2018/11/15 17:11 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: AInterfaceComparator.java, v0.1 2018/11/15 17:11 Leckie Exp $$
  */
 public class AInterfaceComparator implements Comparator<AInterface> {
 

@@ -1,8 +1,8 @@
 package me.leckie.juggling.simple;
 
 /**
- * @author laixianbo
- * @version $Id: FooUtils.java, v0.1 2018/11/15 18:27 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: FooUtils.java, v0.1 2018/11/15 18:27 Leckie Exp $$
  */
 public abstract class FooUtils {
 

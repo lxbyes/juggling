@@ -5,8 +5,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 /**
- * @author laixianbo
- * @version $Id: ConfigValueService.java, v0.1 2018/11/16 11:03 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: ConfigValueService.java, v0.1 2018/11/16 11:03 Leckie Exp $$
  */
 @Service
 public class ConfigValueService implements PostConstructAndPreDestroyListener {

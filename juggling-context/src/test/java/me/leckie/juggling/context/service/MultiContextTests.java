@@ -199,7 +199,6 @@ public class MultiContextTests implements BeanFactoryAware, ApplicationContextAw
         key -> System.out.println(key + ": " + annotationConfigApplicationContext.getBean(key).getClass().getName()));
   }
 
-
   /**
    * parent and child container can have same beanName
    */
