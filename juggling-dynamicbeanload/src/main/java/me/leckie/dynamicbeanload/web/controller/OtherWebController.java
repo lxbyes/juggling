@@ -6,8 +6,6 @@ import me.leckie.dynamicbeanload.service.DynamicWebService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.HandlerExecutionChain;
-import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 /**
  * @author Leckie
@@ -18,17 +16,13 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 public class OtherWebController {
 
   @Autowired
-  private RequestMappingHandlerMapping requestMappingHandlerMapping;
-
-  @Autowired
   private DynamicWebService dynamicWebService;
 
   @RequestMapping("/**")
   public Object handle(HttpServletRequest request, HttpServletResponse response) throws Exception {
-    CustomHttpServletRequest customHttpServletRequest = new CustomHttpServletRequest(request);
-    HandlerExecutionChain mappingHandler = requestMappingHandlerMapping.getHandler(request);
-    Object result = dynamicWebService.handleRequest(customHttpServletRequest, response);
-    return request;
+    // CustomHttpServletRequest customHttpServletRequest = new CustomHttpServletRequest(request);
+    Object mv = dynamicWebService.handleRequest(request, response);
+    return mv;
   }
 
   @RequestMapping("/mappings")

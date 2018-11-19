@@ -4,8 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
 /**
- * @author laixianbo
- * @version $Id: CustomHttpServletRequest.java, v0.1 2018/11/19 17:58 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: CustomHttpServletRequest.java, v0.1 2018/11/19 17:58 Leckie Exp $$
  */
 public class CustomHttpServletRequest extends HttpServletRequestWrapper {
 
@@ -26,6 +26,6 @@ public class CustomHttpServletRequest extends HttpServletRequestWrapper {
 
   @Override
   public StringBuffer getRequestURL() {
-    return new StringBuffer(super.getRequestURL().toString().replace("/other", ""));
+    return new StringBuffer(super.getRequestURL().toString().replace("/others", ""));
   }
 }

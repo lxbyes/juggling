@@ -43,7 +43,7 @@ public class ExtendController implements PostConstructAndPreDestroyListener {
   public Object putPerson(HttpServletRequest request, HttpServletResponse response) throws IOException {
     ObjectMapper objectMapper = new ObjectMapper();
     Person person = objectMapper.readValue(request.getInputStream(), Person.class);
-    return objectMapper.writeValueAsString(person);
+    return person;
   }
 
 }
