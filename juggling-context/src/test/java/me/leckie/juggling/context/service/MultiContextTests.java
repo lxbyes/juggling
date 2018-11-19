@@ -9,6 +9,7 @@ import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import me.leckie.juggling.context.CustomBeanNameGenerator;
 import me.leckie.juggling.context.comparator.AInterfaceComparator;
 import me.leckie.juggling.facade.AInterface;
 import org.junit.Assert;
@@ -26,7 +27,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.context.annotation.AnnotationBeanNameGenerator;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.core.io.Resource;
@@ -193,7 +193,8 @@ public class MultiContextTests implements BeanFactoryAware, ApplicationContextAw
   @Test
   public void testBeanNameGenerator() {
     AnnotationConfigApplicationContext annotationConfigApplicationContext = (AnnotationConfigApplicationContext) subApplicationContext;
-    annotationConfigApplicationContext.scan("me.leckie.juggling");
+    annotationConfigApplicationContext.setBeanNameGenerator(new CustomBeanNameGenerator());
+    annotationConfigApplicationContext.scan("me.leckie.juggling.simple");
     annotationConfigApplicationContext.getBeansOfType(Object.class).keySet().forEach(
         key -> System.out.println(key + ": " + annotationConfigApplicationContext.getBean(key).getClass().getName()));
   }
@@ -251,7 +252,7 @@ public class MultiContextTests implements BeanFactoryAware, ApplicationContextAw
     subApplicationContext.setClassLoader(urlClassLoader);
     subApplicationContext.setAllowBeanDefinitionOverriding(true);
     subApplicationContext.refresh();
-    subApplicationContext.setBeanNameGenerator(new AnnotationBeanNameGenerator());
+    // subApplicationContext.setBeanNameGenerator(new AnnotationBeanNameGenerator());
     subApplicationContext.start();
     return subApplicationContext;
   }
