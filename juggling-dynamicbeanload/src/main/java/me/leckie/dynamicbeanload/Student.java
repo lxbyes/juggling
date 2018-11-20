@@ -3,8 +3,8 @@ package me.leckie.dynamicbeanload;
 import java.io.Serializable;
 
 /**
- * @author laixianbo
- * @version $Id: Student.java, v0.1 2018/11/20 9:45 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: Student.java, v0.1 2018/11/20 9:45 Leckie Exp $$
  */
 public class Student implements Serializable {
 
