@@ -29,7 +29,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.HandlerExecutionChain;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
@@ -81,51 +80,10 @@ public class DynamicWebService implements ApplicationContextAware {
         BeanDefinitionBuilder.genericBeanDefinition(MappingJackson2HttpMessageConverter.class.getName())
             .getBeanDefinition());
     List<HttpMessageConverter<?>> messageConverters = requestMappingHandlerAdapter.getMessageConverters();
-    messageConverters.add(
-        (HttpMessageConverter<?>) subApplicationContext.getBean(MappingJackson2HttpMessageConverter.class.getName()));
+    messageConverters.addAll(subApplicationContext.getBeansOfType(MappingJackson2HttpMessageConverter.class).values());
+    // add MappingJackson2HttpMessageConverter support
     requestMappingHandlerAdapter.setMessageConverters(messageConverters);
-    /*subApplicationContext.registerBeanDefinition(Jackson2ObjectMapperBuilder.class.getName(),
-        BeanDefinitionBuilder.genericBeanDefinition(Jackson2ObjectMapperBuilder.class.getName()).getBeanDefinition());
-    subApplicationContext.registerBeanDefinition(JsonComponentModule.class.getName(),
-        BeanDefinitionBuilder.genericBeanDefinition(JsonComponentModule.class.getName()).getBeanDefinition());*/
-    /*subApplicationContext.registerBeanDefinition(CustomWebMvcConfigurer.class.getName(),
-        BeanDefinitionBuilder.genericBeanDefinition(CustomWebMvcConfigurer.class.getName()).getBeanDefinition());*/
-    /*subApplicationContext
-        .registerBeanDefinition("httpMessageConverter", BeanDefinitionBuilder.genericBeanDefinition(
-            MappingJackson2HttpMessageConverter.class.getName()).getBeanDefinition());*/
-
-   /* List<HttpMessageConverter<?>> httpMessageConverters = new ArrayList<>();
-    subApplicationContext.getBeansOfType(HttpMessageConverter.class).values()
-        .forEach(httpMessageConverter -> httpMessageConverters.add(httpMessageConverter));
-    requestMappingHandlerAdapter.setMessageConverters(httpMessageConverters);*/
-    /*requestMappingHandlerAdapter.setRequestBodyAdvice(new ArrayList<RequestBodyAdvice>() {{
-      add(new JsonViewRequestBodyAdvice());
-    }});
-    requestMappingHandlerAdapter.setResponseBodyAdvice(new ArrayList<ResponseBodyAdvice<?>>() {{
-      add(new JsonViewResponseBodyAdvice());
-    }});*/
-    // methodValidationPostProcessor, ResponseBodyAdvice, RequestBodyAdvice
-    // requestMappingHandlerAdapter.setBeanFactory(subApplicationContext.getBeanFactory());
     Arrays.stream(subApplicationContext.getBeanDefinitionNames()).forEach(System.out::println);
-    // Map<String, Object> beansWithAnnotation = subApplicationContext.getBeansWithAnnotation(RestController.class);
-    // beansWithAnnotation.keySet().forEach(beanName -> registerMapping(beanName));
-    /*System.out.println("-------------------------------");
-    Arrays.stream(applicationContext.getBeanDefinitionNames()).forEach(beanName -> {
-      System.out.println(beanName + " -> " + applicationContext.getBean(beanName).getClass().getName());
-    });*/
-    System.out.println("-------------------------------");
-    subApplicationContext.getBeansOfType(HttpMessageConverter.class).forEach((k, v) -> {
-      System.out.println(k + ": " + v);
-    });
-    System.out.println("-------------------------------");
-    subApplicationContext.getBeansOfType(WebMvcConfigurer.class).forEach((k, v) -> {
-      System.out.println(k + ": " + v);
-    });
-    System.out.println("-------------------------------");
-    requestMappingHandlerAdapter.getMessageConverters().forEach(System.out::println);
-    System.out.println("-------------------------------");
-    requestMappingHandlerAdapter.getReturnValueHandlers().forEach(System.out::println);
-    System.out.println("-------------------------------");
   }
 
   public Object handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {

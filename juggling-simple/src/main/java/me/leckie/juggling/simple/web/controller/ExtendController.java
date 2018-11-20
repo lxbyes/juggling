@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import me.leckie.juggling.facade.WebController;
 import me.leckie.juggling.facade.listener.PostConstructAndPreDestroyListener;
 import me.leckie.juggling.simple.AService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @version $Id: ExtendController.java, v0.1 2018/11/13 15:47 Leckie Exp $$
  */
 @RestController
-@RequestMapping("/others")
-public class ExtendController implements PostConstructAndPreDestroyListener {
+public class ExtendController implements WebController, PostConstructAndPreDestroyListener {
 
   @Autowired
   private AService aService;
