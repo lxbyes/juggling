@@ -65,10 +65,11 @@ public class DynamicWebService implements ApplicationContextAware {
     subApplicationContext.scan("me.leckie.juggling.simple");
     subApplicationContext.refresh();
     subApplicationContext.start();
+
     subApplicationContext.registerBeanDefinition("requestMappingHandlerMapping",
-        BeanDefinitionBuilder.genericBeanDefinition(RequestMappingHandlerMapping.class.getName()).getBeanDefinition());
+        BeanDefinitionBuilder.genericBeanDefinition(RequestMappingHandlerMapping.class).getBeanDefinition());
     subApplicationContext.registerBeanDefinition("requestMappingHandlerAdapter",
-        BeanDefinitionBuilder.genericBeanDefinition(RequestMappingHandlerAdapter.class.getName())
+        BeanDefinitionBuilder.genericBeanDefinition(RequestMappingHandlerAdapter.class)
             .getBeanDefinition());
     requestMappingHandlerMapping = (RequestMappingHandlerMapping) subApplicationContext
         .getBean("requestMappingHandlerMapping");
@@ -77,7 +78,7 @@ public class DynamicWebService implements ApplicationContextAware {
    /* subApplicationContext.registerBeanDefinition(StringHttpMessageConverter.class.getName(),
         BeanDefinitionBuilder.genericBeanDefinition(StringHttpMessageConverter.class.getName()).getBeanDefinition());*/
     subApplicationContext.registerBeanDefinition(MappingJackson2HttpMessageConverter.class.getName(),
-        BeanDefinitionBuilder.genericBeanDefinition(MappingJackson2HttpMessageConverter.class.getName())
+        BeanDefinitionBuilder.genericBeanDefinition(MappingJackson2HttpMessageConverter.class)
             .getBeanDefinition());
     List<HttpMessageConverter<?>> messageConverters = requestMappingHandlerAdapter.getMessageConverters();
     messageConverters.addAll(subApplicationContext.getBeansOfType(MappingJackson2HttpMessageConverter.class).values());
