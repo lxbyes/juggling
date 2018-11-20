@@ -3,9 +3,7 @@ package me.leckie.dynamicbeanload.service;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,18 +11,14 @@ import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import me.leckie.dynamicbeanload.web.controller.CustomWebMvcConfigurer;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.boot.jackson.JsonComponentModule;
 import org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,7 +28,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.HandlerAdapter;
 import org.springframework.web.servlet.HandlerExecutionChain;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
@@ -67,8 +60,7 @@ public class DynamicWebService implements ApplicationContextAware {
     subApplicationContext.setParent(applicationContext);
     // subApplicationContext.setServletContext(applicationContext.getServletContext());
     URLClassLoader urlClassLoader = URLClassLoader.newInstance(
-        new URL[]{new URL("file:/Users/leckie/git/juggling/juggling-simple/target/juggling-simple-1.0-SNAPSHOT.jar"),
-            new URL("file:\\D:\\juggling-simple-2.jar")});
+        new URL[]{new URL("file:D:\\git\\juggling\\juggling-simple\\target\\juggling-simple-1.0-SNAPSHOT.jar")});
     subApplicationContext.setClassLoader(urlClassLoader);
     subApplicationContext.setAllowBeanDefinitionOverriding(true);
     subApplicationContext.scan("me.leckie.juggling.simple");
@@ -79,29 +71,39 @@ public class DynamicWebService implements ApplicationContextAware {
     subApplicationContext.registerBeanDefinition("requestMappingHandlerAdapter",
         BeanDefinitionBuilder.genericBeanDefinition(RequestMappingHandlerAdapter.class.getName())
             .getBeanDefinition());
-
-    subApplicationContext.registerBeanDefinition(StringHttpMessageConverter.class.getName(),
-        BeanDefinitionBuilder.genericBeanDefinition(StringHttpMessageConverter.class.getName()).getBeanDefinition());
-    subApplicationContext.registerBeanDefinition(MappingJackson2HttpMessageConverter.class.getName(),
-        BeanDefinitionBuilder.genericBeanDefinition(MappingJackson2HttpMessageConverter.class.getName())
-            .getBeanDefinition());
-    subApplicationContext.registerBeanDefinition(Jackson2ObjectMapperBuilder.class.getName(),
-        BeanDefinitionBuilder.genericBeanDefinition(Jackson2ObjectMapperBuilder.class.getName()).getBeanDefinition());
-    subApplicationContext.registerBeanDefinition(JsonComponentModule.class.getName(),
-        BeanDefinitionBuilder.genericBeanDefinition(JsonComponentModule.class.getName()).getBeanDefinition());
-    subApplicationContext.registerBeanDefinition(CustomWebMvcConfigurer.class.getName(),
-        BeanDefinitionBuilder.genericBeanDefinition(CustomWebMvcConfigurer.class.getName()).getBeanDefinition());
-    /*subApplicationContext
-        .registerBeanDefinition("httpMessageConverter", BeanDefinitionBuilder.genericBeanDefinition(
-            MappingJackson2HttpMessageConverter.class.getName()).getBeanDefinition());*/
     requestMappingHandlerMapping = (RequestMappingHandlerMapping) subApplicationContext
         .getBean("requestMappingHandlerMapping");
     requestMappingHandlerAdapter = (RequestMappingHandlerAdapter) subApplicationContext
         .getBean("requestMappingHandlerAdapter");
-    List<HttpMessageConverter<?>> httpMessageConverters = new ArrayList<>();
+   /* subApplicationContext.registerBeanDefinition(StringHttpMessageConverter.class.getName(),
+        BeanDefinitionBuilder.genericBeanDefinition(StringHttpMessageConverter.class.getName()).getBeanDefinition());*/
+    subApplicationContext.registerBeanDefinition(MappingJackson2HttpMessageConverter.class.getName(),
+        BeanDefinitionBuilder.genericBeanDefinition(MappingJackson2HttpMessageConverter.class.getName())
+            .getBeanDefinition());
+    List<HttpMessageConverter<?>> messageConverters = requestMappingHandlerAdapter.getMessageConverters();
+    messageConverters.add(
+        (HttpMessageConverter<?>) subApplicationContext.getBean(MappingJackson2HttpMessageConverter.class.getName()));
+    requestMappingHandlerAdapter.setMessageConverters(messageConverters);
+    /*subApplicationContext.registerBeanDefinition(Jackson2ObjectMapperBuilder.class.getName(),
+        BeanDefinitionBuilder.genericBeanDefinition(Jackson2ObjectMapperBuilder.class.getName()).getBeanDefinition());
+    subApplicationContext.registerBeanDefinition(JsonComponentModule.class.getName(),
+        BeanDefinitionBuilder.genericBeanDefinition(JsonComponentModule.class.getName()).getBeanDefinition());*/
+    /*subApplicationContext.registerBeanDefinition(CustomWebMvcConfigurer.class.getName(),
+        BeanDefinitionBuilder.genericBeanDefinition(CustomWebMvcConfigurer.class.getName()).getBeanDefinition());*/
+    /*subApplicationContext
+        .registerBeanDefinition("httpMessageConverter", BeanDefinitionBuilder.genericBeanDefinition(
+            MappingJackson2HttpMessageConverter.class.getName()).getBeanDefinition());*/
+
+   /* List<HttpMessageConverter<?>> httpMessageConverters = new ArrayList<>();
     subApplicationContext.getBeansOfType(HttpMessageConverter.class).values()
         .forEach(httpMessageConverter -> httpMessageConverters.add(httpMessageConverter));
-    requestMappingHandlerAdapter.setMessageConverters(httpMessageConverters);
+    requestMappingHandlerAdapter.setMessageConverters(httpMessageConverters);*/
+    /*requestMappingHandlerAdapter.setRequestBodyAdvice(new ArrayList<RequestBodyAdvice>() {{
+      add(new JsonViewRequestBodyAdvice());
+    }});
+    requestMappingHandlerAdapter.setResponseBodyAdvice(new ArrayList<ResponseBodyAdvice<?>>() {{
+      add(new JsonViewResponseBodyAdvice());
+    }});*/
     // methodValidationPostProcessor, ResponseBodyAdvice, RequestBodyAdvice
     // requestMappingHandlerAdapter.setBeanFactory(subApplicationContext.getBeanFactory());
     Arrays.stream(subApplicationContext.getBeanDefinitionNames()).forEach(System.out::println);
@@ -111,12 +113,19 @@ public class DynamicWebService implements ApplicationContextAware {
     Arrays.stream(applicationContext.getBeanDefinitionNames()).forEach(beanName -> {
       System.out.println(beanName + " -> " + applicationContext.getBean(beanName).getClass().getName());
     });*/
+    System.out.println("-------------------------------");
     subApplicationContext.getBeansOfType(HttpMessageConverter.class).forEach((k, v) -> {
       System.out.println(k + ": " + v);
     });
+    System.out.println("-------------------------------");
     subApplicationContext.getBeansOfType(WebMvcConfigurer.class).forEach((k, v) -> {
       System.out.println(k + ": " + v);
     });
+    System.out.println("-------------------------------");
+    requestMappingHandlerAdapter.getMessageConverters().forEach(System.out::println);
+    System.out.println("-------------------------------");
+    requestMappingHandlerAdapter.getReturnValueHandlers().forEach(System.out::println);
+    System.out.println("-------------------------------");
   }
 
   public Object handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {

@@ -2,8 +2,11 @@ package me.leckie.dynamicbeanload.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import me.leckie.dynamicbeanload.Student;
 import me.leckie.dynamicbeanload.service.DynamicWebService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,6 +31,11 @@ public class OtherWebController {
   @RequestMapping("/mappings")
   public Object mappings() {
     return dynamicWebService.getMappings();
+  }
+
+  @PutMapping("/students")
+  public Object students(@RequestBody Student student) {
+    return student;
   }
 
 }
