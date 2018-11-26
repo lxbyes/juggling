@@ -1,12 +1,13 @@
 package me.leckie.dynamicbeanload;
 
 import java.io.Serializable;
+import me.leckie.juggling.facade.listener.PostConstructAndPreDestroyListener;
 
 /**
  * @author Leckie
  * @version $Id: Student.java, v0.1 2018/11/20 9:45 Leckie Exp $$
  */
-public class Student implements Serializable {
+public class Student implements Serializable, PostConstructAndPreDestroyListener {
 
   private String name;
 
