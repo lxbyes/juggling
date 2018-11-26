@@ -59,6 +59,7 @@ public class DynamicWebService implements ApplicationContextAware {
     URLClassLoader urlClassLoader = URLClassLoader.newInstance(
         new URL[]{new URL("file:D:\\git\\juggling\\juggling-simple\\target\\juggling-simple-1.0-SNAPSHOT.jar")});
     subApplicationContext.setClassLoader(urlClassLoader);
+    // subApplicationContext.setBeanNameGenerator(new ClassNameBeanNameGenerator());
     subApplicationContext.setAllowBeanDefinitionOverriding(true);
     subApplicationContext.scan("me.leckie.juggling.simple");
     subApplicationContext.refresh();
@@ -82,6 +83,7 @@ public class DynamicWebService implements ApplicationContextAware {
         .addAll(subApplicationContext.getBeansOfType(MappingJackson2HttpMessageConverter.class).values());
     System.out.println("----------------------------");
     Arrays.stream(subApplicationContext.getBeanDefinitionNames()).forEach(System.out::println);
+    subApplicationContext.containsLocalBean("leckie");
   }
 
   public Object handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
