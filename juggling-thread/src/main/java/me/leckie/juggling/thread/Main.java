@@ -10,6 +10,7 @@ import java.util.concurrent.Executors;
 public class Main {
 
   public static void main(String[] args) {
+    Thread.setDefaultUncaughtExceptionHandler((t, e) -> System.out.println(t.getName() + " -> " + e.getMessage()));
     Thread thread = new Thread(new ExceptionTask());
     try {
       thread.start();
@@ -24,7 +25,7 @@ public class Main {
       executorService.execute(new ExceptionTask());
     } catch (Throwable e) {
     }
-
+    executorService.shutdown();
   }
 
 }
