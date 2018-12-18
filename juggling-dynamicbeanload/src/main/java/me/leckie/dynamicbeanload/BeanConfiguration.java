@@ -7,8 +7,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @author laixianbo
- * @version $Id: BeanConfiguration.java, v0.1 2018/11/26 10:47 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: BeanConfiguration.java, v0.1 2018/11/26 10:47 Leckie Exp $$
  */
 @Configuration
 public class BeanConfiguration {

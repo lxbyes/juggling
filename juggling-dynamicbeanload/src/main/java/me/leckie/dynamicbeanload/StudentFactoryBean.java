@@ -3,8 +3,8 @@ package me.leckie.dynamicbeanload;
 import org.springframework.beans.factory.FactoryBean;
 
 /**
- * @author laixianbo
- * @version $Id: StudentFactoryBean.java, v0.1 2018/11/26 10:44 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: StudentFactoryBean.java, v0.1 2018/11/26 10:44 Leckie Exp $$
  */
 public class StudentFactoryBean implements FactoryBean<Student> {
 

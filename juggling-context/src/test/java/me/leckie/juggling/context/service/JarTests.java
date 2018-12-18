@@ -21,8 +21,8 @@ import sun.net.www.protocol.jar.Handler;
 import sun.net.www.protocol.jar.JarURLConnection;
 
 /**
- * @author laixianbo
- * @version $Id: JarTests.java, v0.1 2018/11/30 17:57 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: JarTests.java, v0.1 2018/11/30 17:57 Leckie Exp $$
  */
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @RunWith(SpringRunner.class)

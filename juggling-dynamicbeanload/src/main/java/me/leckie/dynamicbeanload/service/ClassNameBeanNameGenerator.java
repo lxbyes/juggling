@@ -7,8 +7,8 @@ import org.springframework.context.annotation.AnnotationBeanNameGenerator;
 import org.springframework.util.StringUtils;
 
 /**
- * @author laixianbo
- * @version $Id: ClassNameBeanNameGenerator.java, v0.1 2018/11/26 10:28 laixianbo Exp $$
+ * @author Leckie
+ * @version $Id: ClassNameBeanNameGenerator.java, v0.1 2018/11/26 10:28 Leckie Exp $$
  */
 public class ClassNameBeanNameGenerator extends AnnotationBeanNameGenerator {
 

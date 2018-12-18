@@ -32,6 +32,7 @@
     <module>juggling-simple</module>
     <module>juggling-facade</module>
     <module>juggling-context</module>
+    <module>juggling-thread</module>
   </modules>
 
   <dependencyManagement>
