@@ -11,7 +11,7 @@ public class LongTimeTask implements Runnable {
   @Override
   public void run() {
     int count = 0;
-    while (count < 10) {
+    while (count < 6) {
       try {
         TimeUnit.SECONDS.sleep(5);
         System.out.println(Thread.currentThread().getName() + " is running. count: " + count);
