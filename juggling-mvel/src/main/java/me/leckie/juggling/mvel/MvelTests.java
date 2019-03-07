@@ -5,7 +5,7 @@ import java.util.Map;
 import org.mvel2.MVEL;
 
 /**
- * @author laixianbo
+ * @author Leckie
  * @version $Id: MvelTests.java, v0.1 2018/12/27 16:45 john Exp $$
  */
 public class MvelTests {
