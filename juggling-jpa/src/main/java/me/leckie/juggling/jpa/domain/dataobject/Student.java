@@ -7,42 +7,42 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * @author laixianbo
+ * @author Leckie
  * @version $Id: Student.java, v0.1 2019/5/15 14:52 john Exp $$
  */
 @Entity
 @Table(name = "student")
 public class Student {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-  private String name;
+    private String name;
 
-  private String gender;
+    private String gender;
 
-  public Long getId() {
-    return id;
-  }
+    public Long getId() {
+        return id;
+    }
 
-  public void setId(Long id) {
-    this.id = id;
-  }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-  public String getName() {
-    return name;
-  }
+    public String getName() {
+        return name;
+    }
 
-  public void setName(String name) {
-    this.name = name;
-  }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-  public String getGender() {
-    return gender;
-  }
+    public String getGender() {
+        return gender;
+    }
 
-  public void setGender(String gender) {
-    this.gender = gender;
-  }
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 }
