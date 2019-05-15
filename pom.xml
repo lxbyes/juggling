@@ -33,6 +33,7 @@
     <module>juggling-facade</module>
     <module>juggling-context</module>
     <module>juggling-thread</module>
+    <module>juggling-jpa</module>
   </modules>
 
   <dependencyManagement>
