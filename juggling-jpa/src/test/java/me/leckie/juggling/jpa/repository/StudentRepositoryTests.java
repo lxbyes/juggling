@@ -27,7 +27,6 @@ public class StudentRepositoryTests {
     @Transactional
     @Commit
     public void test() {
-        studentRepository.flush();
         Student student2 = studentRepository.findById(2L).orElse(null);
         Student student3 = studentRepository.findById(3L).orElse(null);
         studentRepository.updateName(2l, "Vickie123");
