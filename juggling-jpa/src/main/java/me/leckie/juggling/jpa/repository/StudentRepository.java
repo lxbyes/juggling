@@ -21,6 +21,14 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     @Query(value = "update Student t set t.name=?2 where t.id=?1")
     void updateNameFlushAutomatically(Long id, String name);
 
+    @Modifying(flushAutomatically = true)
+    @Query(value = "update student t set t.name=concat(t.name, ?2) where t.id=?1", nativeQuery = true)
+    void increaseNameFlushAutomatically(Long id, String name);
+
+    @Modifying
+    @Query(value = "update student t set t.name=concat(t.name, ?2) where t.id=?1", nativeQuery = true)
+    void increaseName(Long id, String name);
+
     @Modifying(clearAutomatically = true)
     @Query(value = "update Student t set t.gender=?2 where t.id=?1")
     void updateGenderClearAutomatically(Long id, String gender);
@@ -28,6 +36,9 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     @Modifying(flushAutomatically = true)
     @Query(value = "update Student t set t.gender=?2 where t.id=?1")
     void updateGenderFlushAutomatically(Long id, String gender);
+
+    @Query(value = "from Student t where t.id=?1")
+    Student queryById(Long id);
 
     @Modifying
     @Query(value = "update Student t set t.name=?2 where t.id=?1")

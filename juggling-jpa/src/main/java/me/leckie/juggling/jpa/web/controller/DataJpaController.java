@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @author laixianbo
+ * @author Leckie
  * @version $Id: DataJpaController.java, v0.1 2019/5/15 16:34 john Exp $$
  */
 @RestController
