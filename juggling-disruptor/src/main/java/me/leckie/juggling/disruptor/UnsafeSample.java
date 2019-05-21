@@ -1,6 +1,8 @@
 package me.leckie.juggling.disruptor;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 import sun.misc.Unsafe;
 
@@ -10,7 +12,8 @@ import sun.misc.Unsafe;
  */
 public class UnsafeSample {
 
-  public static void main(String[] args) throws InstantiationException, NoSuchFieldException, IllegalAccessException {
+  public static void main(String[] args)
+      throws InstantiationException, NoSuchFieldException, IllegalAccessException, InvocationTargetException {
     Field unsafeField = Unsafe.class.getDeclaredField("theUnsafe");
     unsafeField.setAccessible(true);
     Unsafe unsafe = (Unsafe) unsafeField.get(null);
@@ -22,6 +25,12 @@ public class UnsafeSample {
     messageField.set(o, "Hello, World!");
     o.say();
     System.out.println(Modifier.isStatic(unsafeField.getModifiers()));
+    // use reflect
+    Constructor<?>[] constructors = PrivateClass.class.getDeclaredConstructors();
+    constructors[0].setAccessible(true);
+    PrivateClass o1 = (PrivateClass) constructors[0].newInstance();
+    o1.say();
+    System.out.println(o1);
   }
 
 }

@@ -9,7 +9,7 @@ public class PrivateClass {
   private String message;
 
   private PrivateClass() {
-    message = PrivateClass.class.getName() + " constructed.";
+    message = "Hello, constructor.";
     System.out.println(PrivateClass.class.getName() + " constructed.");
   }
 
