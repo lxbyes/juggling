@@ -31,6 +31,10 @@ public class UnsafeSample {
     PrivateClass o1 = (PrivateClass) constructors[0].newInstance();
     o1.say();
     System.out.println(o1);
+    boolean success = unsafe
+        .compareAndSwapObject(o, unsafe.objectFieldOffset(messageField), "Hello, World!", "Hello, CAS!");
+    System.out.println(success);
+    o.say();
   }
 
 }
