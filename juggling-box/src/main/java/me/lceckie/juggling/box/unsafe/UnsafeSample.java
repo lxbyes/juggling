@@ -1,4 +1,4 @@
-package me.leckie.juggling.disruptor;
+package me.lceckie.juggling.box.unsafe;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;

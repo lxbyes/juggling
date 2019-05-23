@@ -1,4 +1,4 @@
-package me.leckie.juggling.disruptor;
+package me.lceckie.juggling.box.disruptor;
 
 import com.lmax.disruptor.BlockingWaitStrategy;
 import com.lmax.disruptor.EventFactory;

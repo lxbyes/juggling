@@ -1,4 +1,4 @@
-package me.leckie.juggling.disruptor;
+package me.lceckie.juggling.box.unsafe;
 
 /**
  * @author laixianbo
