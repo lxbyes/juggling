@@ -12,16 +12,19 @@ public class Consumer implements Runnable {
 
   private BlockingQueue<String> queue;
 
-  public Consumer(BlockingQueue<String> queue) {
+  private final int maxRound;
+
+  public Consumer(BlockingQueue<String> queue, int maxRound) {
     this.queue = queue;
+    this.maxRound = maxRound;
   }
 
   @Override
   public void run() {
     int round = 0;
-    while (round < 200) {
+    while (round < maxRound) {
       Random random = new Random();
-      int nextInt = 200 + random.nextInt(1000);
+      int nextInt = 2000 + random.nextInt(1000);
       try {
         TimeUnit.MILLISECONDS.sleep(nextInt);
       } catch (InterruptedException e) {

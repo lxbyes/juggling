@@ -7,7 +7,7 @@ import java.lang.reflect.Modifier;
 import sun.misc.Unsafe;
 
 /**
- * @author laixianbo
+ * @author Leckie
  * @version $Id: UnsafeSample.java, v0.1 2019/5/21 19:26 john Exp $$
  */
 public class UnsafeSample {

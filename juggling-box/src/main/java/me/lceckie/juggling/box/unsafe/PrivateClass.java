@@ -1,7 +1,7 @@
 package me.lceckie.juggling.box.unsafe;
 
 /**
- * @author laixianbo
+ * @author Leckie
  * @version $Id: PrivateClass.java, v0.1 2019/5/21 19:27 john Exp $$
  */
 public class PrivateClass {

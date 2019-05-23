@@ -12,14 +12,17 @@ public class Producer implements Runnable {
 
   private BlockingQueue<String> queue;
 
-  public Producer(BlockingQueue<String> queue) {
+  private final int maxRound;
+
+  public Producer(BlockingQueue<String> queue, int maxRound) {
     this.queue = queue;
+    this.maxRound = maxRound;
   }
 
   @Override
   public void run() {
     int round = 0;
-    while (round < 200) {
+    while (round < maxRound) {
       Random random = new Random();
       int nextInt = 50 + random.nextInt(500);
       try {
