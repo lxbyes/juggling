@@ -2,7 +2,7 @@ CREATE TABLE `a_auth_user` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `tid` bigint(20) DEFAULT NULL,
   `employee_no` varchar(64) COLLATE utf8_bin DEFAULT NULL COMMENT '员工工号',
-  `name` varchar(32) COLLATE utf8_bin DEFAULT NULL,
+  `message` varchar(32) COLLATE utf8_bin DEFAULT NULL,
   `password` varchar(128) COLLATE utf8_bin DEFAULT NULL,
   `username` varchar(64) COLLATE utf8_bin DEFAULT NULL,
   `email` varchar(64) COLLATE utf8_bin DEFAULT NULL,
@@ -24,4 +24,4 @@ CREATE TABLE `a_auth_user` (
   KEY `idx_mobile` (`mobile`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-INSERT INTO `juggling_migration`.`a_auth_user`(`tid`, `employee_no`, `name`, `password`, `username`, `email`, `group_id`, `mobile`, `avatar`, `ext_data`, `account_non_expired`, `account_non_locked`, `credentials_non_expired`, `enabled`, `deleted`) VALUES (1, '1', 'Leckie', 'password', 'leckie', 'leckie@bbdservice.com', NULL, '18888888888', NULL, NULL, 1, 1, 1, 1, 0);
+INSERT INTO `juggling_migration`.`a_auth_user`(`tid`, `employee_no`, `message`, `password`, `username`, `email`, `group_id`, `mobile`, `avatar`, `ext_data`, `account_non_expired`, `account_non_locked`, `credentials_non_expired`, `enabled`, `deleted`) VALUES (1, '1', 'Leckie', 'password', 'leckie', 'leckie@bbdservice.com', NULL, '18888888888', NULL, NULL, 1, 1, 1, 1, 0);

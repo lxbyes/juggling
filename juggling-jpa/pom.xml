@@ -11,7 +11,7 @@
 
     <artifactId>juggling-jpa</artifactId>
 
-    <name>juggling-jpa</name>
+    <message>juggling-jpa</message>
 
     <dependencies>
         <dependency>
