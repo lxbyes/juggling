@@ -11,8 +11,12 @@ public class ConstructInjectComponent {
 
   private InjectService injectService;
 
-  public ConstructInjectComponent(InjectService injectService) {
+  private ConfigurableProperties configurableProperties;
+
+  public ConstructInjectComponent(InjectService injectService, ConfigurableProperties configurationProperties) {
     this.injectService = injectService;
+    this.configurableProperties = configurationProperties;
+    configurationProperties.print();
   }
 
   public void hello(String name) {

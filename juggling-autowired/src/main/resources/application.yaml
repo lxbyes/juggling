@@ -1,0 +1,12 @@
+properties:
+  map:
+    key: value
+    zhangsan: lisi
+    hello: hi
+
+hello:
+  a: 1
+  b: 2
+  c: 3
+
+nihao: 你好
