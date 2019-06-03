@@ -1,6 +1,8 @@
 package me.leckie.juggling.autowired.service;
 
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
@@ -26,12 +28,15 @@ public class MappingProperties {
 
   private Map<String, String> fieldMapping = new LinkedHashMap<>();
 
+  private List<Map<String, String>> list = new LinkedList<>();
+
   @PostConstruct
   private void postConstruct() {
     logger.info("machineNameMap={}", machineNameMap);
     logger.info("productCodeAreaMap={}", productCodeAreaMap);
     logger.info("productCodeMap={}", productCodeMap);
     logger.info("fieldMapping={}", fieldMapping);
+    logger.info("list={}", list);
   }
 
   public Map<String, String> getMachineNameMap() {
@@ -64,5 +69,13 @@ public class MappingProperties {
 
   public void setFieldMapping(Map<String, String> fieldMapping) {
     this.fieldMapping = fieldMapping;
+  }
+
+  public List<Map<String, String>> getList() {
+    return list;
+  }
+
+  public void setList(List<Map<String, String>> list) {
+    this.list = list;
   }
 }

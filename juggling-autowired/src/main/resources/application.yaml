@@ -37,3 +37,11 @@ mapping:
     applyTerm: timeLimit
     purPose: purpose
     comBankBusiTypeArr: compBankBusiTypeArr
+  list:
+    - hi: hello
+      hi1: Hello
+      wo: me
+      i: I
+    - wo: mm
+      ai: 唉
+      love: 爱
