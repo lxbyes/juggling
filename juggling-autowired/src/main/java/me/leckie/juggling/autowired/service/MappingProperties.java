@@ -30,6 +30,8 @@ public class MappingProperties {
 
   private List<Map<String, String>> list = new LinkedList<>();
 
+  private List<Map<String, String>> list2 = new LinkedList<>();
+
   @PostConstruct
   private void postConstruct() {
     logger.info("machineNameMap={}", machineNameMap);
@@ -37,6 +39,7 @@ public class MappingProperties {
     logger.info("productCodeMap={}", productCodeMap);
     logger.info("fieldMapping={}", fieldMapping);
     logger.info("list={}", list);
+    logger.info("list2={}", list2);
   }
 
   public Map<String, String> getMachineNameMap() {
@@ -77,5 +80,13 @@ public class MappingProperties {
 
   public void setList(List<Map<String, String>> list) {
     this.list = list;
+  }
+
+  public List<Map<String, String>> getList2() {
+    return list2;
+  }
+
+  public void setList2(List<Map<String, String>> list2) {
+    this.list2 = list2;
   }
 }
