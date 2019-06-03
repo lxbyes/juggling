@@ -10,3 +10,30 @@ hello:
   c: 3
 
 nihao: 你好
+
+mapping:
+  machineNameMap:
+    cjdatasrvtest05: k1
+    kunlun01: k0
+    kunlun02: k1
+    kunlun03: k2
+  productCodeAreaMap:
+    107080: 重庆
+    107081: 贵州
+    107083: 四川
+  productCodeMap:
+    107080: CHSX
+    107081: CHSX_GZ
+    107083: CHSX_SC
+    testProductCode: testscene
+  fieldMapping:
+    applyNum: applyNumber
+    indName: legalPerson
+    indCertID: legalPersonIdCard
+    entName: companyName
+    entCreditID: creditCode
+    entRegID: regNumber
+    applyAmount: amount
+    applyTerm: timeLimit
+    purPose: purpose
+    comBankBusiTypeArr: compBankBusiTypeArr

@@ -9,7 +9,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * @author laixianbo
+ * @author Leckie
  * @version 2: ConditionSample.java, v0.1 2019/5/31 9:45 john Exp $$
  */
 public class ConditionSample {
