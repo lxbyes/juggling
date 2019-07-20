@@ -34,7 +34,6 @@
     <module>juggling-context</module>
     <module>juggling-thread</module>
     <module>juggling-jpa</module>
-    <module>juggling-disruptor</module>
     <module>juggling-sort</module>
   </modules>
 
