@@ -35,6 +35,7 @@
     <module>juggling-thread</module>
     <module>juggling-jpa</module>
     <module>juggling-sort</module>
+    <module>juggling-springsession</module>
   </modules>
 
   <dependencyManagement>
