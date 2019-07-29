@@ -1,0 +1,11 @@
+server:
+  port: 8988
+spring:
+  application:
+    name: juggling-springsession
+management:
+  endpoint:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
