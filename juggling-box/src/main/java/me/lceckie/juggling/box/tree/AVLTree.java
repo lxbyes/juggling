@@ -157,6 +157,10 @@ public class AVLTree {
     }
   }
 
+  public void deleteNode(int value) {
+    
+  }
+
   private void adjust(Node node, int value) {
     if (getBalance(node) > 1) {
       if (node.lChild.value > value) {

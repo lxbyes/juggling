@@ -36,6 +36,7 @@
     <module>juggling-jpa</module>
     <module>juggling-sort</module>
     <module>juggling-springsession</module>
+    <module>juggling-grpc</module>
   </modules>
 
   <dependencyManagement>

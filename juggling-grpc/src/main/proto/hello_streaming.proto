@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "me.leckie.juggling.grpc.manualflowcontrol";
+option java_outer_classname = "HelloStreamingProto";
+option objc_class_prefix = "HLWS";
+
+service StreamingGreeter {
+  rpc SayHelloStreaming (stream HelloRequest) returns (stream HelloReply) {
+  }
+}
+
+message HelloRequest {
+  string name = 1;
+}
+
+message HelloReply {
+  string message = 1;
+}
