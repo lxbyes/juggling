@@ -37,6 +37,7 @@
     <module>juggling-sort</module>
     <module>juggling-springsession</module>
     <module>juggling-grpc</module>
+    <module>juggling-aop</module>
   </modules>
 
   <dependencyManagement>
