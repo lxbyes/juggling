@@ -15,7 +15,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  * @version $Id: RedisConfiguration.java, v0.1 2018/10/23 9:20 Leckie Exp $$
  */
 @Configuration
-@Import(RedisAutoConfiguration.class)
+// @Import(RedisAutoConfiguration.class)
 public class RedisConfiguration {
 
   @Bean
