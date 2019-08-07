@@ -43,3 +43,5 @@ yarn-error.log*
 *.njsproj
 *.sln.DS_Store
 .vscode
+release.properties
+pom.xml.releaseBackup
