@@ -2,7 +2,9 @@ package me.lceckie.juggling.box.threadlocal;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -11,25 +13,30 @@ import org.junit.Test;
  */
 public class InheritableContextTest {
 
+  private String value = "some string";
+
+  @Before
+  public void setUp() {
+    InheritableContext.set(value);
+  }
+
+  @After
+  public void clearContext() {
+    InheritableContext.clear();
+  }
+
   @Test
   public void shouldGetRightWhenSingleThread() {
-    String value = "This will only in Single Thread!";
-    InheritableContext.set(value);
     Assert.assertEquals(value, InheritableContext.get());
   }
 
   @Test
   public void shouldGetNonNullWhenInChildThread() throws InterruptedException {
-    final Map<String, String> wrapper = new HashMap<>();
-    String value = "This will not in child thread!";
 
-    InheritableContext.set(value);
-    Thread childThread = new Thread(new Runnable() {
-      @Override
-      public void run() {
-        String value = InheritableContext.get();
-        wrapper.put("value", value);
-      }
+    final Map<String, String> wrapper = new HashMap<>();
+
+    Thread childThread = new Thread(() -> {
+      wrapper.put("value", InheritableContext.get());
     });
     childThread.start();
     childThread.join();
