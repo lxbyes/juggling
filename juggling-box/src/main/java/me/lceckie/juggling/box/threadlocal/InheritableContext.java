@@ -1,7 +1,7 @@
 package me.lceckie.juggling.box.threadlocal;
 
 /**
- * @author laixianbo_cd
+ * @author Leckie
  * @date 2019-10-14
  */
 public abstract class InheritableContext {
